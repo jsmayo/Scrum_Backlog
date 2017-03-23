@@ -1,9 +1,16 @@
 package edu.ncsu.csc216.backlog.command;
 
+/**
+ * Concrete class that encapulates user interactions with the GUI for 
+ * processing by the scrum backlog FSM in TaskItem.
+ * 
+ * @author Steven
+ */
 public class Command {
-
+	
 	private String note;
 	private String noteAuthor;
+	/** CommandValue enumerator for the Scrum Backlog FSM. */
 	public static enum CommandValue { BACKLOG, CLAIM, PROCESS, VERIFY, COMPLETE, REJECT }
 	
 	public Command(CommandValue command, String note, String noteAuthor) {

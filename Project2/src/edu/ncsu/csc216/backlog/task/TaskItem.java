@@ -1,10 +1,15 @@
 package edu.ncsu.csc216.backlog.task;
 
 import java.util.ArrayList;
-
 import edu.ncsu.csc216.backlog.command.Command;
 import edu.ncsu.csc216.task.xml.Task;
 
+/**
+ * Interface that describes behaivors of any concrete TaskItem 
+ * for the Scrum Backlog FSM. 
+ * 
+ * @author Steven Mayo
+ */
 public class TaskItem {
 
 	private int taskId;
@@ -133,6 +138,11 @@ public class TaskItem {
 	
 	}
 	
+	/**
+	 * Concrete class that represents the backlog state of the Scrum Backlog FSM.
+	 * 
+	 * @author Steven
+	 */
 	private class BacklogState implements TaskItemState {
 		
 		private BacklogState() {
@@ -148,6 +158,11 @@ public class TaskItem {
 		}
 	}
 	
+	/**
+	 * Concrete class that represents the owned state of the Scrum Backlog FSM.
+	 * 
+	 * @author Steven Mayo
+	 */
 	private class OwnedState implements TaskItemState {
 
 		private OwnedState() {
@@ -163,6 +178,11 @@ public class TaskItem {
 		}
 	}
 	
+	/**
+	 * Concrete class that represents the processing state of the Scrum Backlog FSM
+	 * 
+	 * @author Steven Mayo
+	 */
 	private class ProcessingState implements TaskItemState {
 
 		private ProcessingState() {
@@ -178,6 +198,11 @@ public class TaskItem {
 		}
 	}
 	
+	/**
+	 * Concrete class that represents the verifying state of the Scrum Backlog FSM.
+	 * 
+	 * @author Steven Mayo
+	 */
 	private class VerifyingState implements TaskItemState {
 		
 		private VerifyingState() {
@@ -193,6 +218,12 @@ public class TaskItem {
 		}
 	}
 	
+	
+	/**
+	 * Concrete class that represents the done state of the Scrum Backlog FSM.
+	 * 
+	 * @author Steven Mayo
+	 */
 	private class DoneState implements TaskItemState {
 		
 		private DoneState() {
@@ -208,6 +239,11 @@ public class TaskItem {
 		}
 	}
 	
+	/**
+	 * Concrete class that represents the rejected state of the Scrum Backlog FSM.
+	 * 
+	 * @author Steven Mayo
+	 */
 	private class RejectedState implements TaskItemState {
 		
 		private RejectedState() {
