@@ -12,31 +12,63 @@ import edu.ncsu.csc216.task.xml.Task;
  */
 public class TaskItem {
 
+	/** Unique ID number of the TaskItem */
 	private int taskId;
+	/** State of the TaskItem */
 	private TaskItemState state;
+	/** Title of the TaskItem */
 	private String title;
+	/** Creator of the TaskItem */
 	private String creator;
+	/** Owner of the TaskItem */
 	private String owner;
+	/** Verification indicator */
 	private boolean isVerified;
+	/** Backlog State Object for ScrumBacklog FSM */
 	private final TaskItemState backlogState = new BacklogState();
+	/** Owned State Object for ScrumBacklog FSM */
 	private final TaskItemState ownedState = new OwnedState();
+	/** Processing State Object for ScrumBacklog FSM */
 	private final TaskItemState processingState = new ProcessingState();
+	/** Verifying State Object for ScrumBacklog FSM */
 	private final TaskItemState verifyingState = new VerifyingState();
+	/** Done State Object for ScrumBacklog FSM */
 	private final TaskItemState doneState = new DoneState();
+	/** Rejected State Object for ScrumBacklog FSM */
 	private final TaskItemState rejectedState = new RejectedState();
+	/** Name assigned to the Backlog State */
 	public static final String BACKLOG_NAME = "Backlog";
+	/** Name assigned to the Owned State */
 	public static final String OWNED_NAME = "Owned";
+	/** Name assigned to the Backlog State */
 	public static final String PROCESSING_NAME = "Processing";
+	/** Name assigned to the Processing State */
 	public static final String VERIFYING_NAME = "Verifying";
+	/** Name assigned to the Done State */
 	public static final String DONE_NAME = "Done";
+	/** Name assigned to the Rejected State */
 	public static final String REJECTED_NAME = "Rejected";
+	/** String representing the Feature Type of TaskItem */
 	static final String T_FEATURE = "F";
+	/** String representing the Bug Type of TaskItem */
 	static final String T_BUG = "B";
+	/** String representing the Technical Work Type of TaskItem */
 	static final String T_TECHNICAL_WORK = "TW";
+	/** String representing the Knowledge Acquisition Type of TaskItem */
 	static final String T_KNOWLEDGE_ACQUISITION = "KA";
+	/** Counter for unique ID number assignment */
 	static int counter = 1;
+	/** Enumerator for the designating the specific Type of the TaskItem Object */
 	public static enum Type { FEATURE, BUG, TECHNICAL_WORK, KNOWLEDGE_ACQUISITION }
 	
+	
+	/**
+	 * Constructor for a TaskItem.
+	 * @param title Title of the TaskItem.
+	 * @param type Type of the TaskItem.
+	 * @param creator Creator of the TaskItem.
+	 * @param note Note contents associated with the TaskItem.
+	 */
 	public TaskItem(String title, Type type, String creator, String note) {
 	
 	}
