@@ -91,7 +91,7 @@ public class TaskItemList {
 	 * @return List of TaskItem objects that are filtered by the TaskItem
 	 * creator name.
 	 */
-	public List<TaskItem> getTaskItemsByCreator(String creator) {
+	public List<TaskItem> getTasksByCreator(String creator) {
 		return new ArrayList<TaskItem>();
 	}
 	
