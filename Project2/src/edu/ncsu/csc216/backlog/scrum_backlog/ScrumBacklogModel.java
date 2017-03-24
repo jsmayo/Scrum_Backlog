@@ -45,12 +45,12 @@ public class ScrumBacklogModel {
 	 * @throws IllegalArgumentException If the TaskItemList is null.
 	 */
 	public void saveTasksToFile(String filename) {
-		try {
-			TaskWriter writer = new TaskWriter(filename);
-			writer.marshal();
-		} catch(TaskIOException e) {
-			 throw new IllegalArgumentException();
-		}
+//		try {
+//			TaskWriter writer = new TaskWriter(filename);
+//			writer.marshal();
+//		} catch(TaskIOException e) {
+//			 throw new IllegalArgumentException();
+//		}
 	}
 	
 	/**
@@ -62,12 +62,12 @@ public class ScrumBacklogModel {
 	 * 
 	 */
 	public void loadTasksFromFile(String filename) {
-		try {
-			TaskReader reader = new TaskReader(filename);
-			reader.getTasks();
-		} catch(TaskIOException e) {
-			 throw new IllegalArgumentException();
-		}
+//		try {
+//			TaskReader reader = new TaskReader(filename);
+//			reader.getTasks();
+//		} catch(TaskIOException e) {
+//			 throw new IllegalArgumentException();
+//		}
 	}
 	
 	/**
