@@ -25,7 +25,7 @@ public class TaskItemList {
 	 * Constructor for the TaskItemList object.
 	 */
 	public TaskItemList() {
-		this.emptyList();
+		tasks = new ArrayList<TaskItem>();
 	}
 	
 	/**
