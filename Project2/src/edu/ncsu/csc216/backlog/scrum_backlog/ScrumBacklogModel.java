@@ -32,6 +32,8 @@ public class ScrumBacklogModel {
 	 * @return ScrumBacklogModel Instance of ScrumBacklogModel
 	 */
 	public static ScrumBacklogModel getInstance() {
+		// check this.. I changed this from: return new ScrumBacklogModel();
+		if(ScrumBacklogModel.singleton == null ) new ScrumBacklogModel();
 		return singleton;
 	}
 	

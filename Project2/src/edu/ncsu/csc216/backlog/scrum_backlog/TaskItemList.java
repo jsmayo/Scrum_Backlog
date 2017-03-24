@@ -18,14 +18,14 @@ import edu.ncsu.csc216.backlog.task.TaskItem.Type;
  */
 public class TaskItemList {
 
-	ArrayList<TaskItem> tasks;
+	List<TaskItem> tasks;
 	static final int INITIAL_COUNTER_VALUE = 1;
 	
 	/**
 	 * Constructor for the TaskItemList object.
 	 */
 	public TaskItemList() {
-		emptyList();
+		this.emptyList();
 	}
 	
 	/**
