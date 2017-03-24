@@ -73,71 +73,154 @@ public class TaskItem {
 	
 	}
 	
+	/**
+	 * Constructs a TaskItem Object using a Task Object as parameter input.
+	 * @param task Task to make the TaskItem from.
+	 */
 	public TaskItem(Task task) {
 		
 	}
 	
+	/**
+	 * Increments the counter variable by one each time
+	 * a new TaskItem is constructed.
+	 */
 	public static void incrementCounter() {
 		counter++;
 	}
 	
+	/**
+	 * Getter method for the current TaskItem's ID number.
+	 * @return The unique ID number assigned to the current TaskItem.
+	 */
 	public int getTaskItemId() {
 		return this.taskId;
 	}
 
+	/**
+	 * Getter method that returns the current TaskItem's State name.
+	 * @return State name of the current Task Item.
+	 */
 	public String getStateName() {
 		return "state name";
 	}
-
+	
+	/**
+	 * Sets the current TaskItem to one of the six State subclasses required
+	 * for ScrumBacklog's FSM.
+	 * @param state String representation of the State to set the current
+	 * TaskItem to.
+	 * @throws IllegalArgumentException if the state parameter is null.
+	 */
 	private void setState(String state) {
 		if(state == null ) throw new IllegalArgumentException();
+	
 	}
 	
+	/**
+	 * Sets the current TaskItem Type using a string parameter. The string 
+	 * will correspond to one of the four Types specified in the
+	 * Type enumerator. 
+	 * @param type String representation of one of the four Type enumerators.
+	 */
 	private void setType(String type) {
 		
 	}
 	
+	/**
+	 * Getter method for the current TaskItem's Type.
+	 * @return type Type of the TaskItem.
+	 */
 	public Type getType() {
 		return Type.BUG;
 	}
 	
+	/**
+	 * Getter method for the abbreviated string representation 
+	 * of the current TaskItem's Type.
+	 * @return typeString String representation of the current
+	 * TaskItem Type.
+	 */
 	public String getTypeString() {
 		return "type";
 	}
 	
+	/**
+	 * Getter method for the non-abbreviated String representation
+	 * of the current TaskItem.
+	 * @return fullTypeString Non-abbreviated String representation
+	 * of the current TaskItem.
+	 */
 	public String getTypeFullString() {
 		return "type";
 	}
 	
+	/**
+	 * Getter method for the TaskItem owner.
+	 * @return Owner of the current TaskItem.
+	 */
 	public String getOwner() { 
 		return "owner";
 	}
 	
+	/**
+	 * Getter method for the TaskItem title.
+	 * @return Title of the TaskItem.
+	 */
 	public String getTitle() {
 		return "title";
 	}
 	
+	/**
+	 * Getter method for the TaskItem creator.
+	 * @return Creator of the current TaskItem.
+	 */
 	public String getCreator() {
 		return "creator";
 	}
 	
+	/**
+	 * Getter method that returns an ArrayList for all note
+	 * entries associated with the current TaskItem.
+	 * @return noteArray ArrayList of all note entries associated with 
+	 * the current TaskItem.
+	 */
 	public ArrayList<Note> getNotes() {
 		return new ArrayList<Note>();
 	}
 	
+	/**
+	 * Updates the TaskItem's state using a Command parameter propagated from
+	 * the UI.
+	 * @param command Enumerator value from the Command class  used to update the State of the TaskItem.
+	 */
 	public void update(Command command) {
 		
 	}
 	
+	/**
+	 * Getter method that returns the TaskItem Object as a Task Object.
+	 * @return Task Object corresponding to the current TaskItem.
+	 */
 	public Task getXMLTask() {
 		return null;
 		
 	}
 
+	/**
+	 * Sets the TaskItem's counter variable to that of the intriguer parameter. 
+	 * @param counter Number to assign as the current counter value.
+	 */
 	public static void setCounter(int counter) {
 		TaskItem.counter = counter;
 	}
 	
+	/**
+	 * Returns a 2D string array for Notes associated with the current TaskItem. 
+	 * There is a row for each note entry, as well as, two columns for displaying
+	 * the note author's name and note contents. 
+	 * @return
+	 */
 	public String[][] getNotesArray() {
 		return new String[0][0];
 	}

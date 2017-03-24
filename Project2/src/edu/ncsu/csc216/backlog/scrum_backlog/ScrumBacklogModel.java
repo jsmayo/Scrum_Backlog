@@ -3,6 +3,7 @@ package edu.ncsu.csc216.backlog.scrum_backlog;
 import edu.ncsu.csc216.backlog.command.Command;
 import edu.ncsu.csc216.backlog.task.TaskItem;
 import edu.ncsu.csc216.backlog.task.TaskItem.Type;
+import edu.ncsu.csc216.task.xml.*;
 
 /** Concrete class that implements the Singleton design pattern.
  * This class both maintains the TaskItemList and handles commands
@@ -13,12 +14,16 @@ import edu.ncsu.csc216.backlog.task.TaskItem.Type;
  */
 public class ScrumBacklogModel {
 	
+	private static ScrumBacklogModel singleton;
+	private TaskItemList taskItemList;
+	
 	/**
 	 * Constructor used for creating the ScrumBacklogModel
 	 * instance.
 	 */
-	public ScrumBacklogModel() {
-		
+	private ScrumBacklogModel() {
+		singleton = new ScrumBacklogModel();
+		taskItemList = new TaskItemList();
 	}
 	
 	/**
@@ -27,7 +32,7 @@ public class ScrumBacklogModel {
 	 * @return ScrumBacklogModel Instance of ScrumBacklogModel
 	 */
 	public static ScrumBacklogModel getInstance() {
-		return new ScrumBacklogModel();
+		return singleton;
 	}
 	
 	/**
@@ -39,7 +44,8 @@ public class ScrumBacklogModel {
 	 */
 	public void saveTasksToFile(String filename) {
 		try {
-			//TaskWriter.write(filename);
+			TaskWriter writer = new TaskWriter(filename);
+			writer.marshal();
 		} catch(TaskIOException e) {
 			 throw new IllegalArgumentException();
 		}
@@ -55,7 +61,8 @@ public class ScrumBacklogModel {
 	 */
 	public void loadTasksFromFile(String filename) {
 		try {
-			//TaskWriter.read(filename);
+			TaskReader reader = new TaskReader(filename);
+			reader.getTasks();
 		} catch(TaskIOException e) {
 			 throw new IllegalArgumentException();
 		}
@@ -65,7 +72,8 @@ public class ScrumBacklogModel {
 	 * Creates a new TaskItemList.
 	 */
 	public void createNewTaskItemList() {
-	
+		taskItemList = new TaskItemList(); //will call constructor, which calls emptyList().
+		
 	}
 	
 	
@@ -153,8 +161,7 @@ public class ScrumBacklogModel {
 	 * @param note Note designated for the TaskItem.
 	 */
 	public void addTaskItemToList(String title, Type type, String creator, String note) {
-		TaskItem taskItem = new TaskItem(title, type, creator, note);
-		tasks.addTaskItem(title, type, creator, note);
+		taskItemList.addTaskItem(title, type, creator, note);
 		
 	}
 }

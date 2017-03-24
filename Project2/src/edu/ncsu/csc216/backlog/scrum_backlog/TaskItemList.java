@@ -25,13 +25,21 @@ public class TaskItemList {
 	 * Constructor for the TaskItemList object.
 	 */
 	public TaskItemList() {
+		emptyList();
 	}
 	
 	/**
 	 * Removes the contencts of the current TaskItemList.
 	 */
 	private void emptyList() {
-		//stuff
+		/*if one test adds TaskItems to a list, that those TaskItems will 
+		 * be there for the next test. To make each test atomic so that it
+		 *  can run in isolation, you can use the ScrumBacklogModel.createNewTaskItemList() 
+		 *  method to remove any tasks that exist in the ScrumBacklogModel. Since the taskItemList 
+		 *  is the only other state (besides the singleton instance), using that method resets the Singleton 
+		 *  to an empty TaskItemList.
+		 */
+		tasks = new ArrayList<TaskItem>();
 	}
 	
 	/**
@@ -42,8 +50,10 @@ public class TaskItemList {
 	 * @param creator Creator of the TaskItem.
 	 * @param note Note designated for the TaskItem.
 	 */
-	public void addTaskItemToList(String title, Type type, String creator, String note) {
-		
+	public int addTaskItem(String title, Type type, String creator, String note) {
+		TaskItem taskItem = new TaskItem(title, type, creator, note);
+		tasks.add(taskItem);
+		return  taskItem.getTaskItemId();
 	}
 	
 	/**
