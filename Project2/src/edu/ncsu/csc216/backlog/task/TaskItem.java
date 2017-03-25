@@ -2,6 +2,7 @@ package edu.ncsu.csc216.backlog.task;
 
 import java.util.ArrayList;
 import edu.ncsu.csc216.backlog.command.Command;
+import edu.ncsu.csc216.backlog.command.Command.CommandValue;
 import edu.ncsu.csc216.task.xml.Task;
 
 /**
@@ -60,6 +61,8 @@ public class TaskItem {
 	static int counter = 1;
 	/** Enumerator for the designating the specific Type of the TaskItem Object */
 	public static enum Type { FEATURE, BUG, TECHNICAL_WORK, KNOWLEDGE_ACQUISITION }
+	private Type type;
+	private Note notes;
 	
 	
 	/**
@@ -70,7 +73,18 @@ public class TaskItem {
 	 * @param note Note contents associated with the TaskItem.
 	 */
 	public TaskItem(String title, Type type, String creator, String note) {
-	
+		this.title = title;
+		setState(BACKLOG_NAME);
+		this.creator = creator;
+		isVerified = false;
+		creator = getCreator();
+		this.type = type;
+		
+		
+		
+		
+		
+		
 	}
 	
 	/**
@@ -78,6 +92,12 @@ public class TaskItem {
 	 * @param task Task to make the TaskItem from.
 	 */
 	public TaskItem(Task task) {
+		//make these strings and call this()?
+//		this.title = task.getTitle();
+//		this.type = setType(task.getType());
+//		this.creator = task.getCreator();
+//		this.creator = task.getNoteList().getNotes().get(task.getId()).getNoteAuthor();
+//		//this.note = task.getNoteList().getNotes().get(task.getId()).getNoteText();
 		
 	}
 	
@@ -102,7 +122,7 @@ public class TaskItem {
 	 * @return State name of the current Task Item.
 	 */
 	public String getStateName() {
-		return "state name";
+		return title;
 	}
 	
 	/**
@@ -114,6 +134,9 @@ public class TaskItem {
 	 */
 	private void setState(String state) {
 		if(state == null ) throw new IllegalArgumentException();
+		if(state == TaskItem.DONE_NAME) this.state = doneState;
+		
+		
 	
 	}
 	
@@ -124,6 +147,9 @@ public class TaskItem {
 	 * @param type String representation of one of the four Type enumerators.
 	 */
 	private void setType(String type) {
+		if(type == null || type.isEmpty()) throw new IllegalArgumentException();
+		if(type == this.getTypeString() || type == "T_FEATURE") this.type = Type.BUG;
+		
 		
 	}
 	
@@ -132,7 +158,8 @@ public class TaskItem {
 	 * @return type Type of the TaskItem.
 	 */
 	public Type getType() {
-		return Type.BUG;
+		if(this.type == Type.BUG) return Type.BUG;
+		return Type.FEATURE;
 	}
 	
 	/**
@@ -160,6 +187,7 @@ public class TaskItem {
 	 * @return Owner of the current TaskItem.
 	 */
 	public String getOwner() { 
+		if (creator != null && owner != null) return notes.getNoteAuthor();
 		return "owner";
 	}
 	
@@ -176,7 +204,10 @@ public class TaskItem {
 	 * @return Creator of the current TaskItem.
 	 */
 	public String getCreator() {
-		return "creator";
+		if(state == ownedState) {
+			return creator = notes.getNoteAuthor();
+		}
+		else return "creator";
 	}
 	
 	/**
@@ -195,7 +226,7 @@ public class TaskItem {
 	 * @param command Enumerator value from the Command class  used to update the State of the TaskItem.
 	 */
 	public void update(Command command) {
-		
+		state.updateState(command);
 	}
 	
 	/**
@@ -265,11 +296,13 @@ public class TaskItem {
 		}
 		
 		public void updateState(Command command) {
-			
+			command.getCommand();
+			owner = getOwner();
 		}
 		
 		public String getStateName() {
-			return "state";
+			return BACKLOG_NAME;
+			
 		}
 	}
 	
@@ -281,11 +314,15 @@ public class TaskItem {
 	private class OwnedState implements TaskItemState {
 
 		private OwnedState() {
-
+			owner = "owner";
+			state = ownedState;
+			
 		}
 
 		public void updateState(Command command) {
-
+			if(command.getCommand() == CommandValue.PROCESS);
+			if(isVerified) state = verifyingState;
+			else state = processingState;
 		}
 
 		public String getStateName() {
@@ -301,11 +338,15 @@ public class TaskItem {
 	private class ProcessingState implements TaskItemState {
 
 		private ProcessingState() {
-
+			isVerified = false;
+			title = "title";
+			state = processingState;
+			
+			
 		}
 
 		public void updateState(Command command) {
-
+			state = verifyingState;
 		}
 
 		public String getStateName() {
@@ -321,7 +362,9 @@ public class TaskItem {
 	private class VerifyingState implements TaskItemState {
 		
 		private VerifyingState() {
-			
+			setType("KA");
+			isVerified = true;
+			state = verifyingState;
 		}
 		
 		public void updateState(Command command) {
@@ -342,15 +385,15 @@ public class TaskItem {
 	private class DoneState implements TaskItemState {
 		
 		private DoneState() {
-			
+			state = doneState;
 		}
 		
 		public void updateState(Command command) {
-			
+			state = rejectedState;
 		}
 		
 		public String getStateName() {
-			return "state";
+			return this.getStateName();
 		}
 	}
 	
@@ -362,15 +405,20 @@ public class TaskItem {
 	private class RejectedState implements TaskItemState {
 		
 		private RejectedState() {
-			
+			isVerified = false;
 		}
 		
 		public void updateState(Command command) {
+			if(command.getCommand() == CommandValue.BACKLOG) state = backlogState;
 			
 		}
 		
 		public String getStateName() {
-			return "state";
+			state = backlogState;
+			isVerified = false;
+			return REJECTED_NAME;
+			
+			
 		}
 	}
 	

@@ -8,6 +8,7 @@ package edu.ncsu.csc216.backlog.command;
  */
 public class Command {
 	
+	private CommandValue c;
 	private String note;
 	private String noteAuthor;
 	/** CommandValue enumerator for the Scrum Backlog FSM. */
@@ -18,10 +19,33 @@ public class Command {
 			throw new IllegalArgumentException();
 		this.note = note;
 		this.noteAuthor = noteAuthor;
+		getCommand();
 	}
 	
 	public CommandValue getCommand() {
-		return CommandValue.BACKLOG;
+		switch (c) {
+			case BACKLOG:
+				return c = CommandValue.BACKLOG;
+				
+			case CLAIM:
+				return c = CommandValue.CLAIM;
+				
+			case PROCESS: 
+				return c = CommandValue.PROCESS;
+				
+			case VERIFY:
+				return c = CommandValue.PROCESS;
+				
+			case COMPLETE:
+				return c = CommandValue.COMPLETE;
+				
+			case REJECT:
+				return c = CommandValue.REJECT;
+				
+				default:
+					throw new IllegalArgumentException();
+		}
+						
 	}
 	
 	public String getNoteText() {

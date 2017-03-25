@@ -25,11 +25,13 @@ public class TaskItemList {
 	 * Constructor for the TaskItemList object.
 	 */
 	public TaskItemList() {
+		emptyList();
 		tasks = new ArrayList<TaskItem>();
+		
 	}
 	
 	/**
-	 * Removes the contencts of the current TaskItemList.
+	 * Removes the contents of the current TaskItemList.
 	 */
 	private void emptyList() {
 		/*if one test adds TaskItems to a list, that those TaskItems will 

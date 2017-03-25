@@ -3,7 +3,10 @@ package edu.ncsu.csc216.backlog.scrum_backlog;
 import edu.ncsu.csc216.backlog.command.Command;
 import edu.ncsu.csc216.backlog.task.TaskItem;
 import edu.ncsu.csc216.backlog.task.TaskItem.Type;
-import edu.ncsu.csc216.task.xml.*;
+//import edu.ncsu.csc216.task.xml.*;
+import edu.ncsu.csc216.task.xml.TaskIOException;
+import edu.ncsu.csc216.task.xml.TaskReader;
+import edu.ncsu.csc216.task.xml.TaskWriter;
 
 /** Concrete class that implements the Singleton design pattern.
  * This class both maintains the TaskItemList and handles commands
@@ -45,12 +48,12 @@ public class ScrumBacklogModel {
 	 * @throws IllegalArgumentException If the TaskItemList is null.
 	 */
 	public void saveTasksToFile(String filename) {
-//		try {
-//			TaskWriter writer = new TaskWriter(filename);
-//			writer.marshal();
-//		} catch(TaskIOException e) {
-//			 throw new IllegalArgumentException();
-//		}
+		try {
+			TaskWriter writer = new TaskWriter(filename);
+			writer.marshal();
+		} catch(TaskIOException e) {
+			 throw new IllegalArgumentException();
+		}
 	}
 	
 	/**
@@ -62,12 +65,12 @@ public class ScrumBacklogModel {
 	 * 
 	 */
 	public void loadTasksFromFile(String filename) {
-//		try {
-//			TaskReader reader = new TaskReader(filename);
-//			reader.getTasks();
-//		} catch(TaskIOException e) {
-//			 throw new IllegalArgumentException();
-//		}
+		try {
+			TaskReader reader = new TaskReader(filename);
+			reader.getTasks();
+		} catch(TaskIOException e) {
+			 throw new IllegalArgumentException();
+		}
 	}
 	
 	/**
