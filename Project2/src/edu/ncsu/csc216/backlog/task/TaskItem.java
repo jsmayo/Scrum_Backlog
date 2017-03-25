@@ -291,15 +291,26 @@ public class TaskItem {
 	 */
 	private class BacklogState implements TaskItemState {
 		
+		/**  
+		 * Constructor for the BacklogState transition.
+		 */
 		private BacklogState() {
 			
 		}
 		
+		/**
+		 * Method used to progress from the BacklogState.
+		 * @param Command The Command used to update the current state.
+		 */
 		public void updateState(Command command) {
 			command.getCommand();
 			owner = getOwner();
 		}
 		
+		/**
+		 * Returns the name of the current state as a String.
+		 * @return the name of the current state as a String.
+		 */
 		public String getStateName() {
 			return BACKLOG_NAME;
 			
@@ -307,24 +318,35 @@ public class TaskItem {
 	}
 	
 	/**
-	 * Concrete class that represents the owned state of the Scrum Backlog FSM.
+	 * Concrete class that represents the owned state of the ScrumBacklog FSM.
 	 * 
 	 * @author Steven Mayo
 	 */
 	private class OwnedState implements TaskItemState {
 
+		/**
+		 * Constructor for the OwnedState.
+		 */
 		private OwnedState() {
 			owner = "owner";
 			state = ownedState;
 			
 		}
 
+		
+		/**Method used to handle FSM transitions.
+		 * @param commmand Command Object used to update the state of the current
+		 * TaskItem
+		 */
 		public void updateState(Command command) {
 			if(command.getCommand() == CommandValue.PROCESS);
 			if(isVerified) state = verifyingState;
 			else state = processingState;
 		}
-
+		/**
+		 * Returns the name of the current state as a String.
+		 * @return the name of the current state as a String.
+		 */
 		public String getStateName() {
 			return "state";
 		}
@@ -337,6 +359,9 @@ public class TaskItem {
 	 */
 	private class ProcessingState implements TaskItemState {
 
+		/**
+		 * Constructor for the ProcessingState
+		 */
 		private ProcessingState() {
 			isVerified = false;
 			title = "title";
@@ -345,10 +370,18 @@ public class TaskItem {
 			
 		}
 
+		/**Method used to handle FSM transitions.
+		 * @param commmand Command Object used to update the state of the current
+		 * TaskItem
+		 */
 		public void updateState(Command command) {
 			state = verifyingState;
 		}
 
+		/**
+		 * Returns the name of the current state as a String.
+		 * @return the name of the current state as a String.
+		 */
 		public String getStateName() {
 			return "state";
 		}
@@ -367,10 +400,18 @@ public class TaskItem {
 			state = verifyingState;
 		}
 		
+		/**Method used to handle FSM transitions.
+		 * @param commmand Command Object used to update the state of the current
+		 * TaskItem
+		 */
 		public void updateState(Command command) {
 			
 		}
 		
+		/**
+		 * Returns the name of the current state as a String.
+		 * @return the name of the current state as a String.
+		 */
 		public String getStateName() {
 			return "state";
 		}
@@ -384,14 +425,25 @@ public class TaskItem {
 	 */
 	private class DoneState implements TaskItemState {
 		
+		/**
+		 * Constructor for the DoneState
+		 */
 		private DoneState() {
 			state = doneState;
 		}
 		
+		/**
+		 * Method used to progress from the BacklogState.
+		 * @param Command The Command used to update the current state.
+		 */
 		public void updateState(Command command) {
 			state = rejectedState;
 		}
 		
+		/**
+		 * Returns the name of the current state as a String.
+		 * @return the name of the current state as a String.
+		 */
 		public String getStateName() {
 			return this.getStateName();
 		}
@@ -408,11 +460,19 @@ public class TaskItem {
 			isVerified = false;
 		}
 		
+		/**Method used to handle FSM transitions.
+		 * @param commmand Command Object used to update the state of the current
+		 * TaskItem
+		 */
 		public void updateState(Command command) {
 			if(command.getCommand() == CommandValue.BACKLOG) state = backlogState;
 			
 		}
 		
+		/**
+		 * Returns the name of the current state as a String.
+		 * @return the name of the current state as a String.
+		 */
 		public String getStateName() {
 			state = backlogState;
 			isVerified = false;
