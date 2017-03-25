@@ -334,9 +334,9 @@ public class TaskItem {
 		}
 
 		
-		/**Method used to handle FSM transitions.
+		/**
+		 * Method used to handle FSM transitions.
 		 * @param commmand Command Object used to update the state of the current
-		 * TaskItem
 		 */
 		public void updateState(Command command) {
 			if(command.getCommand() == CommandValue.PROCESS);
@@ -370,9 +370,10 @@ public class TaskItem {
 			
 		}
 
-		/**Method used to handle FSM transitions.
+		/**
+		 * Method used to handle FSM transitions.
 		 * @param commmand Command Object used to update the state of the current
-		 * TaskItem
+		 * 
 		 */
 		public void updateState(Command command) {
 			state = verifyingState;
@@ -456,13 +457,17 @@ public class TaskItem {
 	 */
 	private class RejectedState implements TaskItemState {
 		
+		/**
+		 * Constructor for the RejectedState.
+		 */
 		private RejectedState() {
 			isVerified = false;
 		}
 		
-		/**Method used to handle FSM transitions.
+		/**
+		 * Method used to handle FSM transitions.
 		 * @param commmand Command Object used to update the state of the current
-		 * TaskItem
+		 * 
 		 */
 		public void updateState(Command command) {
 			if(command.getCommand() == CommandValue.BACKLOG) state = backlogState;
