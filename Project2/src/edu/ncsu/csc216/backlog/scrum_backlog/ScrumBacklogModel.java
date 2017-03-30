@@ -1,5 +1,7 @@
 package edu.ncsu.csc216.backlog.scrum_backlog;
 
+import java.util.List;
+
 import edu.ncsu.csc216.backlog.command.Command;
 import edu.ncsu.csc216.backlog.task.TaskItem;
 import edu.ncsu.csc216.backlog.task.TaskItem.Type;
@@ -90,7 +92,13 @@ public class ScrumBacklogModel {
 	 * for every TaskItem returned.
 	 */
 	public Object[][] getTaskItemListAsArray() {
-		return new Object[0][3];
+		Object[][] itemListAsArray = new Object[taskItemList.getTaskItems().size()][3];
+		for(int i = 0; i < itemListAsArray.length; i ++) {
+			itemListAsArray[i][0] = taskItemList.getTaskItems().get(i).getTaskItemId();
+			itemListAsArray[i][1] = taskItemList.getTaskItems().get(i).getStateName();
+			itemListAsArray[i][2] = taskItemList.getTaskItems().get(i).getTitle();
+		}
+		return itemListAsArray;
 	}
 	
 	
@@ -108,7 +116,14 @@ public class ScrumBacklogModel {
 	 */
 	public Object[][] getTaskItemListByOwnerAsArray(String owner) {
 		if(owner == null) throw new IllegalArgumentException();
-		return new Object[0][0];
+		List<TaskItem> itemListByOwner = taskItemList.getTaskItemsByOwner(owner);
+		Object[][] itemListByOwnerArray = new Object[itemListByOwner.size()][3];
+		for(int i = 0; i < itemListByOwnerArray.length; i++) {
+			itemListByOwnerArray[i][0] = itemListByOwner.get(i).getTaskItemId();
+			itemListByOwnerArray[i][1] = itemListByOwner.get(i).getStateName();
+			itemListByOwnerArray[i][2] = itemListByOwner.get(i).getTitle();
+		}
+		return itemListByOwnerArray;
 	}
 	
 	
@@ -127,7 +142,14 @@ public class ScrumBacklogModel {
 	 */
 	public Object[][] getTaskItemListByCreatorAsArray(String creator) {
 		if(creator == null) throw new IllegalArgumentException();
-		return new Object[0][3];
+		List<TaskItem> itemListByCreator = taskItemList.getTasksByCreator(creator);
+		Object[][] itemListByCreatorArray = new Object[itemListByCreator.size()][3];
+		for(int i = 0; i < itemListByCreatorArray.length; i++) {
+			itemListByCreatorArray[i][0] = itemListByCreator.get(i).getTaskItemId();
+			itemListByCreatorArray[i][1] = itemListByCreator.get(i).getStateName();
+			itemListByCreatorArray[i][2] = itemListByCreator.get(i).getTitle();
+		}
+		return itemListByCreatorArray;
 	}
 	
 	/**
@@ -136,7 +158,7 @@ public class ScrumBacklogModel {
 	 * @return TaskItem associated with the provided unique ID number.
 	 */
 	public TaskItem getTaskItemById(int id) {
-		return null;
+		return taskItemList.getTaskItemById(id);
 	}
 	
 	/**
@@ -146,7 +168,7 @@ public class ScrumBacklogModel {
 	 * @param command Command to perform on the associated TaskItem.
 	 */
 	public void executeCommand(int id, Command command) {
-		
+		taskItemList.executeCommand(id, command);
 	}
 	
 	/**
@@ -154,7 +176,7 @@ public class ScrumBacklogModel {
 	 * @param id Unique ID number of the TaskItem to delete.
 	 */
 	public void deleteTaskItemById(int id) {
-		
+		taskItemList.deleteTaskItemById(id);
 	}
 	
 	/**
