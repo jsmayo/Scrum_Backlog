@@ -1,8 +1,12 @@
 package edu.ncsu.csc216.backlog.task;
 
 import java.util.ArrayList;
+import java.util.List;
+
 import edu.ncsu.csc216.backlog.command.Command;
 import edu.ncsu.csc216.backlog.command.Command.CommandValue;
+import edu.ncsu.csc216.task.xml.NoteItem;
+import edu.ncsu.csc216.task.xml.NoteList;
 import edu.ncsu.csc216.task.xml.Task;
 
 /**
@@ -62,7 +66,8 @@ public class TaskItem {
 	/** Enumerator for the designating the specific Type of the TaskItem Object */
 	public static enum Type { FEATURE, BUG, TECHNICAL_WORK, KNOWLEDGE_ACQUISITION }
 	private Type type;
-	private Note notes;
+	private ArrayList<Note> notes;
+	
 	
 	
 	/**
@@ -75,17 +80,12 @@ public class TaskItem {
 	public TaskItem(String title, Type type, String creator, String note) {
 		this.title = title;
 		setState(BACKLOG_NAME);
-		this.creator = creator;
-		isVerified = false;
-		creator = getCreator();
-		this.type = type;
+		notes.add(new Note(creator, note));
+		setType(type.toString());
+		//isVerified = false;
 		TaskItem.setCounter(counter); //set the taskId to the counter 
 		this.taskId = counter;
 		TaskItem.incrementCounter(); //increments counter AFTER setting taskID
-		
-		
-		
-		
 		
 		
 	}
@@ -95,12 +95,23 @@ public class TaskItem {
 	 * @param task Task to make the TaskItem from.
 	 */
 	public TaskItem(Task task) {
-		//make these strings and call this()?
-//		this.title = task.getTitle();
-//		this.type = setType(task.getType());
-//		this.creator = task.getCreator();
-//		this.creator = task.getNoteList().getNotes().get(task.getId()).getNoteAuthor();
-//		//this.note = task.getNoteList().getNotes().get(task.getId()).getNoteText();
+		String title = task.getTitle();
+		String typeString = task.getType();
+		String creator = task.getCreator();
+		List<NoteItem> notelist = task.getNoteList().getNotes();
+		//take notes from task and place into notes for taskitem
+		for(int i = 0; i <= notelist.size(); i++) {
+			notes.add(new Note(notelist.get(i).getNoteAuthor(), notelist.get(i).getNoteText()));
+		}
+		Type type = null;
+		if(typeString.equals(T_BUG)) type = Type.BUG;
+		if(typeString.equals(T_FEATURE)) type = Type.FEATURE;
+		if(typeString.equals(T_KNOWLEDGE_ACQUISITION)) type = Type.KNOWLEDGE_ACQUISITION;
+		if(typeString.equals(T_TECHNICAL_WORK)) type = Type.TECHNICAL_WORK;
+		this.title = title;
+		this.type = type;
+		this.creator = creator;
+		
 		
 	}
 	
@@ -126,29 +137,7 @@ public class TaskItem {
 	 */
 	public String getStateName() {
 		return state.getStateName();
-//		switch (this.state) {
-//		case backlogState:
-//			backlogState.getStateName();
-//			break;
-//		case ownedState:
-//			ownedState.getStateName();
-//				break;
-//		case processingState:
-//			processingState.getStateName();
-//			break;
-//		case verifyingState:
-//			verifyingState.getStateName();
-//			break;
-//		case doneState:
-//			doneState.getStateName();
-//			break;
-//		case rejectedState:
-//			rejectedState.getStateName();
-//			break;
-//			default:
-//				throw new IllegalArgumentException();
-//		}
-		
+
 	}
 	
 	/**
@@ -280,8 +269,8 @@ public class TaskItem {
 	 * @return Owner of the current TaskItem.
 	 */
 	public String getOwner() { 
-		if (creator != null && owner != null) return notes.getNoteAuthor();
-		return "owner";
+		 return this.owner;
+		
 	}
 	
 	/**
@@ -297,10 +286,7 @@ public class TaskItem {
 	 * @return Creator of the current TaskItem.
 	 */
 	public String getCreator() {
-		if(state == ownedState) {
-			return creator = notes.getNoteAuthor();
-		}
-		else return "creator";
+		return this.creator;
 	}
 	
 	/**
@@ -310,7 +296,8 @@ public class TaskItem {
 	 * the current TaskItem.
 	 */
 	public ArrayList<Note> getNotes() {
-		return new ArrayList<Note>();
+		return this.notes;
+		
 	}
 	
 	/**
@@ -327,8 +314,24 @@ public class TaskItem {
 	 * @return Task Object corresponding to the current TaskItem.
 	 */
 	public Task getXMLTask() {
-		return null;
-		
+		Task task = new Task();
+		task.setTitle(getTitle());
+		task.setId(this.getTaskItemId());
+		task.setCreator(getCreator());
+		task.setState(state.getStateName());
+		task.setVerified(isVerified);
+		task.setType(getTypeString());
+		NoteList noteList = new NoteList();
+		for(int i = 0; i <= notes.size(); i++) {
+			NoteItem noteitem = new NoteItem();
+			noteitem.setNoteAuthor(notes.get(i).getNoteAuthor());
+			noteitem.setNoteText(notes.get(i).getNoteText());
+			noteList.getNotes().add(noteitem);
+	
+		}
+		task.setNoteList(noteList);
+
+		return task;
 	}
 
 	/**
@@ -347,7 +350,12 @@ public class TaskItem {
 	 * @return
 	 */
 	public String[][] getNotesArray() {
-		return new String[0][0];
+		String[][] noteArray = new String[notes.size()][2];
+		for(int i = 0; i <= notes.size(); i++) {
+			noteArray[i][0] = notes.get(i).getNoteAuthor();
+			noteArray[i][1] = notes.get(i).getNoteText();
+		}
+		return noteArray;
 	}
 	
 	
@@ -397,7 +405,12 @@ public class TaskItem {
 		 * @param Command The Command used to update the current state.
 		 */
 		public void updateState(Command command) {
-			command.getCommand();
+			if(CommandValue.CLAIM == command.getCommand()) {
+				owner = command.getNoteAuthor();
+				setState(TaskItem.OWNED_NAME); 
+				notes.add(new Note(command.getNoteAuthor(), command.getNoteText()));
+			}
+			else throw new UnsupportedOperationException();
 			
 		}
 		
@@ -422,9 +435,8 @@ public class TaskItem {
 		 * Constructor for the OwnedState.
 		 */
 		private OwnedState() {
-			owner = getOwner();
 			state = ownedState;
-			
+			isVerified = false;
 		}
 
 		
@@ -433,9 +445,19 @@ public class TaskItem {
 		 * @param commmand Command Object used to update the state of the current
 		 */
 		public void updateState(Command command) {
-			if(command.getCommand() == CommandValue.PROCESS);
-			if(isVerified) state = verifyingState;
-			else state = processingState;
+			if(CommandValue.PROCESS == command.getCommand()) {
+				notes.add(new Note(command.getNoteAuthor(), command.getNoteText()));
+				setState(TaskItem.OWNED_NAME); 
+			}
+			else if(CommandValue.BACKLOG == command.getCommand()) {
+				notes.add(new Note(command.getNoteAuthor(), command.getNoteText()));
+				setState(TaskItem.BACKLOG_NAME);
+			}
+			else if(CommandValue.REJECT == command.getCommand()) {
+				notes.add(new Note(command.getNoteAuthor(), command.getNoteText()));
+				setState(TaskItem.REJECTED_NAME);
+			}
+			else throw new UnsupportedOperationException();
 		}
 		/**
 		 * Returns the name of the current state as a String.
@@ -458,8 +480,6 @@ public class TaskItem {
 		 */
 		private ProcessingState() {
 			state = processingState;
-			
-			
 		}
 
 		/**
@@ -468,7 +488,15 @@ public class TaskItem {
 		 * 
 		 */
 		public void updateState(Command command) {
-			state = verifyingState;
+			if(CommandValue.VERIFY == command.getCommand() && Type.KNOWLEDGE_ACQUISITION != getType()) {
+				notes.add(new Note(command.getNoteAuthor(), command.getNoteText()));
+				setState(TaskItem.VERIFYING_NAME); 
+			}
+			else if(CommandValue.BACKLOG == command.getCommand()) {
+				notes.add(new Note(command.getNoteAuthor(), command.getNoteText()));
+				setState(TaskItem.BACKLOG_NAME);
+			}
+			else throw new UnsupportedOperationException();
 		}
 
 		/**
@@ -488,8 +516,6 @@ public class TaskItem {
 	private class VerifyingState implements TaskItemState {
 		
 		private VerifyingState() {
-			setType("KA");
-			isVerified = true;
 			state = verifyingState;
 		}
 		
@@ -498,7 +524,16 @@ public class TaskItem {
 		 * TaskItem
 		 */
 		public void updateState(Command command) {
-			
+			if(CommandValue.COMPLETE == command.getCommand()) {
+				notes.add(new Note(command.getNoteAuthor(), command.getNoteText()));
+				isVerified = true;
+				setState(TaskItem.DONE_NAME); 
+			}
+			else if(CommandValue.PROCESS == command.getCommand()) {
+				notes.add(new Note(command.getNoteAuthor(), command.getNoteText()));
+				setState(TaskItem.PROCESSING_NAME);
+			}
+			else throw new UnsupportedOperationException();
 		}
 		
 		/**
@@ -506,7 +541,7 @@ public class TaskItem {
 		 * @return the name of the current state as a String.
 		 */
 		public String getStateName() {
-			return "state";
+			return TaskItem.VERIFYING_NAME;
 		}
 	}
 	
@@ -530,7 +565,15 @@ public class TaskItem {
 		 * @param Command The Command used to update the current state.
 		 */
 		public void updateState(Command command) {
-			state = rejectedState;
+			if(CommandValue.BACKLOG == command.getCommand()) {
+				notes.add(new Note(command.getNoteAuthor(), command.getNoteText()));
+				setState(TaskItem.BACKLOG_NAME); 
+			}
+			else if(CommandValue.COMPLETE == command.getCommand()) {
+				notes.add(new Note(command.getNoteAuthor(), command.getNoteText()));
+				setState(TaskItem.DONE_NAME);
+			}
+			else throw new UnsupportedOperationException();
 		}
 		
 		/**
@@ -538,7 +581,7 @@ public class TaskItem {
 		 * @return the name of the current state as a String.
 		 */
 		public String getStateName() {
-			return this.getStateName();
+			return TaskItem.DONE_NAME;
 		}
 	}
 	
@@ -562,7 +605,11 @@ public class TaskItem {
 		 * 
 		 */
 		public void updateState(Command command) {
-			if(command.getCommand() == CommandValue.BACKLOG) state = backlogState;
+			if(command.getCommand() == CommandValue.BACKLOG) {
+				notes.add(new Note(command.getNoteAuthor(), command.getNoteText()));
+				setState(TaskItem.BACKLOG_NAME);
+			}
+			else throw new UnsupportedOperationException();
 			
 		}
 		
@@ -571,9 +618,7 @@ public class TaskItem {
 		 * @return the name of the current state as a String.
 		 */
 		public String getStateName() {
-			state = backlogState;
-			isVerified = false;
-			return REJECTED_NAME;
+			return TaskItem.REJECTED_NAME;
 			
 			
 		}
