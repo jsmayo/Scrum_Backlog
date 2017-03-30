@@ -27,7 +27,7 @@ public class ScrumBacklogModel {
 	 * instance.
 	 */
 	private ScrumBacklogModel() {
-		singleton = new ScrumBacklogModel();
+		//singleton = new ScrumBacklogModel();
 		taskItemList = new TaskItemList();
 	}
 	
