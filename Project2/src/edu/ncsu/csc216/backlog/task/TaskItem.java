@@ -10,7 +10,7 @@ import edu.ncsu.csc216.task.xml.NoteList;
 import edu.ncsu.csc216.task.xml.Task;
 
 /**
- * Interface that describes behaivors of any concrete TaskItem 
+ * Interface that describes behaviors of any concrete TaskItem 
  * for the Scrum Backlog FSM. 
  * 
  * @author Steven Mayo
@@ -66,7 +66,7 @@ public class TaskItem {
 	/** Enumerator for the designating the specific Type of the TaskItem Object */
 	public static enum Type { FEATURE, BUG, TECHNICAL_WORK, KNOWLEDGE_ACQUISITION }
 	private Type type;
-	private ArrayList<Note> notes;
+	private ArrayList<Note> notes = new ArrayList();
 	
 	
 	
@@ -78,10 +78,17 @@ public class TaskItem {
 	 * @param note Note contents associated with the TaskItem.
 	 */
 	public TaskItem(String title, Type type, String creator, String note) {
+		if(title == null || title.isEmpty() || creator == null || creator.isEmpty() || note == null || note.isEmpty())
+			throw new IllegalArgumentException();
 		this.title = title;
-		setState(BACKLOG_NAME);
-		notes.add(new Note(creator, note));
-		setType(type.toString());
+		this.creator = creator;
+		this.notes.add(new Note(creator, note));
+		this.state = backlogState;
+		if(type == Type.FEATURE) setType(T_FEATURE);
+		else if(type == Type.BUG) setType(T_BUG);
+		else if(type == Type.KNOWLEDGE_ACQUISITION) setType(T_KNOWLEDGE_ACQUISITION);
+		else if(type == Type.TECHNICAL_WORK) setType(T_TECHNICAL_WORK);
+		else throw new IllegalArgumentException();
 		//isVerified = false;
 		TaskItem.setCounter(counter); //set the taskId to the counter 
 		this.taskId = counter;
@@ -350,7 +357,7 @@ public class TaskItem {
 	 * @return
 	 */
 	public String[][] getNotesArray() {
-		String[][] noteArray = new String[notes.size()][2];
+		String[][] noteArray = new String[notes.size() - 1][2];
 		for(int i = 0; i <= notes.size(); i++) {
 			noteArray[i][0] = notes.get(i).getNoteAuthor();
 			noteArray[i][1] = notes.get(i).getNoteText();
