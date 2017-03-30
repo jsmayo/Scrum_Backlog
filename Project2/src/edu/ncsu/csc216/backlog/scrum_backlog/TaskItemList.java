@@ -42,6 +42,7 @@ public class TaskItemList {
 		 *  to an empty TaskItemList.
 		 */
 		tasks = new ArrayList<TaskItem>();
+		TaskItem.setCounter(1);
 	}
 	
 	/**
@@ -55,7 +56,7 @@ public class TaskItemList {
 	public int addTaskItem(String title, Type type, String creator, String note) {
 		TaskItem taskItem = new TaskItem(title, type, creator, note);
 		tasks.add(taskItem);
-		return  taskItem.getTaskItemId();
+		return taskItem.getTaskItemId();
 	}
 	
 	/**
@@ -63,7 +64,13 @@ public class TaskItemList {
 	 * @param List of Task's to add to the TaskItemList.
 	 */
 	public void addXMLTasks(List<Task> tasklist) {
-		
+		//use TaskItem(Task) constructor.
+		int highestId = -1;
+		for(int i = 0; i <= tasklist.size(); i++) {
+			tasks.add(new TaskItem(tasklist.get(i)));
+			if( tasklist.get(i).getId() > highestId) highestId = tasklist.get(i).getId();
+		}
+		TaskItem.setCounter(highestId + 1);
 	}
 	
 	/**
@@ -82,7 +89,11 @@ public class TaskItemList {
 	 * owner name.
 	 */
 	public List<TaskItem> getTaskItemsByOwner(String owner) {
-		return new ArrayList<TaskItem>();
+		List<TaskItem> byOwner = getTaskItems();
+		for(int i = 0; i <= tasks.size(); i++) {
+			if(tasks.get(i).getOwner().equals(owner)) byOwner.add(tasks.get(i));
+		}
+		return byOwner;
 		
 	}
 	
@@ -94,7 +105,11 @@ public class TaskItemList {
 	 * creator name.
 	 */
 	public List<TaskItem> getTasksByCreator(String creator) {
-		return new ArrayList<TaskItem>();
+		List<TaskItem> byCreator = getTaskItems();
+		for(int i = 0; i <= tasks.size(); i++) {
+			if(tasks.get(i).getCreator().equals(creator)) byCreator.add(tasks.get(i));
+		}
+		return byCreator;
 	}
 	
 	/**
@@ -105,7 +120,12 @@ public class TaskItemList {
 	 * creator name.
 	 */
 	public TaskItem getTaskItemById(int id) {
-		return tasks.get(id);
+		List<TaskItem> byId = getTaskItems();
+		for(int i = 0; i <= tasks.size(); i++) {
+			if(tasks.get(i).getTaskItemId() == id) byId.add(tasks.get(i));
+		}
+		return byId.get(0); //should be only one match.
+
 	}
 	
 	/**
@@ -115,7 +135,7 @@ public class TaskItemList {
 	 * @param command Command to perform on the TaskItem.
 	 */
 	public void executeCommand(int id, Command command) {
-		 
+		 getTaskItemById(id).update(command);
 	}
 	
 	/**
@@ -124,6 +144,10 @@ public class TaskItemList {
 	 * @param id Unique ID number of the TaskItem to delete.
 	 */
 	public void deleteTaskItemById(int id) {
-		
+		List<TaskItem> byId = getTaskItems();
+		for(int i = 0; i <= tasks.size(); i++) {
+			if(tasks.get(i).getTaskItemId() == id) byId.add(tasks.get(i));
+		}
+		tasks.remove(byId.get(0)); //should be only one match.
 	}
 }
