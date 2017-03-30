@@ -79,6 +79,9 @@ public class TaskItem {
 		isVerified = false;
 		creator = getCreator();
 		this.type = type;
+		TaskItem.setCounter(counter); //set the taskId to the counter 
+		this.taskId = counter;
+		TaskItem.incrementCounter(); //increments counter AFTER setting taskID
 		
 		
 		
@@ -122,7 +125,30 @@ public class TaskItem {
 	 * @return State name of the current Task Item.
 	 */
 	public String getStateName() {
-		return title;
+		return state.getStateName();
+//		switch (this.state) {
+//		case backlogState:
+//			backlogState.getStateName();
+//			break;
+//		case ownedState:
+//			ownedState.getStateName();
+//				break;
+//		case processingState:
+//			processingState.getStateName();
+//			break;
+//		case verifyingState:
+//			verifyingState.getStateName();
+//			break;
+//		case doneState:
+//			doneState.getStateName();
+//			break;
+//		case rejectedState:
+//			rejectedState.getStateName();
+//			break;
+//			default:
+//				throw new IllegalArgumentException();
+//		}
+		
 	}
 	
 	/**
@@ -133,8 +159,35 @@ public class TaskItem {
 	 * @throws IllegalArgumentException if the state parameter is null.
 	 */
 	private void setState(String state) {
-		if(state == null ) throw new IllegalArgumentException();
-		if(state == TaskItem.DONE_NAME) this.state = doneState;
+		if(state == null || state.isEmpty()) throw new IllegalArgumentException();
+		switch(state) {
+		case BACKLOG_NAME:
+			this.state = backlogState;
+			break;
+			
+		case OWNED_NAME:
+			this.state = ownedState;
+			break;
+			
+		case PROCESSING_NAME:
+			this.state = processingState;
+			break;
+			
+		case VERIFYING_NAME:
+			this.state = verifyingState;
+			break;
+			
+		case DONE_NAME:
+			this.state = doneState;
+			break;
+			
+		case REJECTED_NAME:
+			this.state = rejectedState;
+			break;
+			
+			default:
+				throw new IllegalArgumentException();
+		}
 		
 		
 	
@@ -148,7 +201,25 @@ public class TaskItem {
 	 */
 	private void setType(String type) {
 		if(type == null || type.isEmpty()) throw new IllegalArgumentException();
-		if(type == this.getTypeString() || type == "T_FEATURE") this.type = Type.BUG;
+		//if(type == this.getTypeString() || type == "T_FEATURE") this.type = Type.BUG;
+		switch (type) {
+		case T_BUG: //compare passed in string type against enum String Type;
+			this.type = Type.BUG;
+			break;
+		case T_FEATURE:
+			this.type = Type.FEATURE;
+			break;
+		case T_KNOWLEDGE_ACQUISITION:
+			this.type = Type.KNOWLEDGE_ACQUISITION;
+			break;
+		case T_TECHNICAL_WORK:
+			this.type = Type.TECHNICAL_WORK;
+			break;
+			default:
+				throw new IllegalArgumentException();
+		}
+		
+			
 		
 		
 	}
@@ -158,8 +229,7 @@ public class TaskItem {
 	 * @return type Type of the TaskItem.
 	 */
 	public Type getType() {
-		if(this.type == Type.BUG) return Type.BUG;
-		return Type.FEATURE;
+		return this.type;
 	}
 	
 	/**
@@ -169,7 +239,18 @@ public class TaskItem {
 	 * TaskItem Type.
 	 */
 	public String getTypeString() {
-		return "type";
+		switch (getType()) {
+		case BUG:
+			return T_BUG;
+		case FEATURE:
+			return T_FEATURE;
+		case KNOWLEDGE_ACQUISITION:
+			return T_KNOWLEDGE_ACQUISITION;
+		case TECHNICAL_WORK:
+			return T_TECHNICAL_WORK;
+			default:
+				throw new IllegalArgumentException();
+		}
 	}
 	
 	/**
@@ -179,7 +260,19 @@ public class TaskItem {
 	 * of the current TaskItem.
 	 */
 	public String getTypeFullString() {
-		return "type";
+		switch(getType()) {
+		case BUG:
+			return "Bug";
+		case FEATURE:
+			return "Feature";
+		case KNOWLEDGE_ACQUISITION:
+			return "Knowledge Acquisition";
+		case TECHNICAL_WORK:
+			return "Technicial Work";
+			default: 
+				throw new IllegalArgumentException();
+		}
+			
 	}
 	
 	/**
@@ -196,7 +289,7 @@ public class TaskItem {
 	 * @return Title of the TaskItem.
 	 */
 	public String getTitle() {
-		return "title";
+		return this.title;
 	}
 	
 	/**
@@ -243,6 +336,7 @@ public class TaskItem {
 	 * @param counter Number to assign as the current counter value.
 	 */
 	public static void setCounter(int counter) {
+		if(counter <= 0) throw new IllegalArgumentException();
 		TaskItem.counter = counter;
 	}
 	
@@ -295,7 +389,7 @@ public class TaskItem {
 		 * Constructor for the BacklogState transition.
 		 */
 		private BacklogState() {
-			
+			isVerified = false;
 		}
 		
 		/**
@@ -304,7 +398,7 @@ public class TaskItem {
 		 */
 		public void updateState(Command command) {
 			command.getCommand();
-			owner = getOwner();
+			
 		}
 		
 		/**
@@ -328,7 +422,7 @@ public class TaskItem {
 		 * Constructor for the OwnedState.
 		 */
 		private OwnedState() {
-			owner = "owner";
+			owner = getOwner();
 			state = ownedState;
 			
 		}
@@ -348,7 +442,7 @@ public class TaskItem {
 		 * @return the name of the current state as a String.
 		 */
 		public String getStateName() {
-			return "state";
+			return TaskItem.OWNED_NAME;
 		}
 	}
 	
@@ -363,8 +457,6 @@ public class TaskItem {
 		 * Constructor for the ProcessingState
 		 */
 		private ProcessingState() {
-			isVerified = false;
-			title = "title";
 			state = processingState;
 			
 			
@@ -384,7 +476,7 @@ public class TaskItem {
 		 * @return the name of the current state as a String.
 		 */
 		public String getStateName() {
-			return "state";
+			return TaskItem.VERIFYING_NAME;
 		}
 	}
 	
