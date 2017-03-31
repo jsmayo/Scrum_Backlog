@@ -70,18 +70,18 @@ public class TaskItemListTest {
 	@Test
 	public void testGetTasksByOwner() {
 		list = new TaskItemList();
-		list.addTaskItem("task1", TaskItem.Type.BUG, "Steven", "All the notes imaginable");
+		list.addTaskItem("task1", TaskItem.Type.BUG, "Jesse", "All the notes imaginable");
 		list.getTaskItemById(1).update(new Command(CommandValue.CLAIM, "Steven", "note")); //CLAIM TASK
-		list.addTaskItem("task2", TaskItem.Type.FEATURE, "Steven", "another note");
+		list.addTaskItem("task2", TaskItem.Type.FEATURE, "Jesse", "another note");
 		list.getTaskItemById(2).update(new Command(CommandValue.CLAIM, "Steven", "note")); //CLAIM TASK
 		assertEquals(3, list.addTaskItem("task3", TaskItem.Type.FEATURE, "Jesse", "another note"));
 		list.getTaskItemById(3).update(new Command(CommandValue.CLAIM, "Jesse", "note")); //CLAIM TASK
 		assertEquals(3, list.getTaskItems().size());
 		assertTrue(list.getTaskItemById(1).getTitle().equals("task1"));
-		assertTrue(list.getTaskItemById(2).getCreator().equals("Steven"));
+		assertTrue(list.getTaskItemById(2).getCreator().equals("Jesse"));
 		assertEquals("size should be 2", 2, list.getTaskItemsByOwner("Steven").size());
 	
-		//assertEquals("size should be 3", 3, list.getTasksByCreator("Steven"));
+		assertEquals("size should be 3", 3, list.getTasksByCreator("Jesse").size());
 	
 	}
 	

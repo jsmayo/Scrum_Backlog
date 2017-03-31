@@ -111,9 +111,13 @@ public class TaskItemList {
 	 * creator name.
 	 */
 	public List<TaskItem> getTasksByCreator(String creator) {
-		List<TaskItem> byCreator = this.getTaskItems();
-		for(int i = 0; i < tasks.size(); i++) {
-			if(tasks.get(i).getCreator().equals(creator)) byCreator.add(tasks.get(i));
+		List<TaskItem> taskItemList = this.getTaskItems();
+		List<TaskItem> byCreator = new ArrayList<TaskItem>();
+		for(int i = 0; i < taskItemList.size(); i++) {
+			if(taskItemList.get(i).getCreator().equals(creator)) {
+				TaskItem task = taskItemList.get(i);
+				byCreator.add(task);
+			}
 		}
 		return byCreator;
 	}
