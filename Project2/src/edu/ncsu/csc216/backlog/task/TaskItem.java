@@ -116,10 +116,10 @@ public class TaskItem {
 			notes.add(new Note(notelist.get(i).getNoteAuthor(), notelist.get(i).getNoteText()));
 		}
 		Type taskType = null;
-		if(typeString.equals(T_BUG)) type = Type.BUG;
-		if(typeString.equals(T_FEATURE)) type = Type.FEATURE;
-		if(typeString.equals(T_KNOWLEDGE_ACQUISITION)) type = Type.KNOWLEDGE_ACQUISITION;
-		if(typeString.equals(T_TECHNICAL_WORK)) type = Type.TECHNICAL_WORK;
+		if(typeString.equals(T_BUG)) taskType = Type.BUG;
+		if(typeString.equals(T_FEATURE)) taskType = Type.FEATURE;
+		if(typeString.equals(T_KNOWLEDGE_ACQUISITION)) taskType = Type.KNOWLEDGE_ACQUISITION;
+		if(typeString.equals(T_TECHNICAL_WORK)) taskType = Type.TECHNICAL_WORK;
 		setState(taskState);
 		this.title = taskTitle;
 		this.type = taskType;
