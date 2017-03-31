@@ -406,6 +406,7 @@ public class TaskItem {
 		 * Constructor for the BacklogState transition.
 		 */
 		private BacklogState() {
+			owner = ""; 
 			isVerified = false;
 		}
 		

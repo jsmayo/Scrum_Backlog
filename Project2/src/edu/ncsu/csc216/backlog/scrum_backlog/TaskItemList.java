@@ -78,7 +78,8 @@ public class TaskItemList {
 	 * @return The list of TaskItems.
 	 */
 	public List<TaskItem> getTaskItems() {
-		return tasks;
+		if(this.tasks == null) return new ArrayList<TaskItem>();
+		return this.tasks;
 	}
 	
 	/**
@@ -89,8 +90,8 @@ public class TaskItemList {
 	 * owner name.
 	 */
 	public List<TaskItem> getTaskItemsByOwner(String owner) {
-		List<TaskItem> byOwner = getTaskItems();
-		for(int i = 0; i <= tasks.size(); i++) {
+		List<TaskItem> byOwner = new ArrayList<TaskItem>();
+		for(int i = 0; i < this.tasks.size(); i++) {
 			if(tasks.get(i).getOwner().equals(owner)) byOwner.add(tasks.get(i));
 		}
 		return byOwner;
