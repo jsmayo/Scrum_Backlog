@@ -38,7 +38,7 @@ public class ScrumBacklogModel {
 	 */
 	public static ScrumBacklogModel getInstance() {
 		// check this.. I changed this from: return new ScrumBacklogModel();
-		if(ScrumBacklogModel.singleton == null ) new ScrumBacklogModel();
+		if(ScrumBacklogModel.singleton == null ) return new ScrumBacklogModel();
 		return singleton;
 	}
 	
@@ -52,6 +52,8 @@ public class ScrumBacklogModel {
 	public void saveTasksToFile(String filename) {
 		try {
 			TaskWriter writer = new TaskWriter(filename);
+			for(int i = 0; i < taskItemList.getTaskItems().size(); i++) 
+				writer.addItem(taskItemList.getTaskItems().get(i).getXMLTask());
 			writer.marshal();
 		} catch(TaskIOException e) {
 			 throw new IllegalArgumentException();
@@ -69,7 +71,7 @@ public class ScrumBacklogModel {
 	public void loadTasksFromFile(String filename) {
 		try {
 			TaskReader reader = new TaskReader(filename);
-			reader.getTasks();
+			taskItemList.addXMLTasks(reader.getTasks());
 		} catch(TaskIOException e) {
 			 throw new IllegalArgumentException();
 		}

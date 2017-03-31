@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<task_list>
+	<tasks>
+		<id>1</id>
+		<state>Backlog</state>
+		<title>Express Carts</title>
+		<type>F</type>
+		<creator>jep</creator>
+		<verified>false</verified>
+		<note_list>
+			<note>
+				<note_text>Express carts always choose the shortest line. If there are multiple shortest lines, an express cart chooses the one with the smallest index.</note_text>
+				<note_author>jep</note_author>
+			</note>
+		</note_list>
+	</tasks>
+	<tasks>
+		<id>2</id>
+		<state>Owned</state>
+		<title>Regular Carts</title>
+		<type>F</type>
+		<creator>jep</creator>
+		<owner>sesmith5</owner>
+		<verified>false</verified>
+		<note_list>
+			<note>
+				<note_text>Regular carts always choose the shortest line excluding the express register line (at index 0). If there are multiple shortest lines, a regular cart chooses one with the smallest index.</note_text>
+				<note_author>jep</note_author>
+			</note>
+			<note>
+				<note_text>Adding to sesmith5 backlog.</note_text>
+				<note_author>sesmith5</note_author>
+			</note>
+		</note_list>
+	</tasks>
+	<tasks>
+		<id>3</id>
+		<state>Processing</state>
+		<title>Java Swing</title>
+		<type>KA</type>
+		<creator>sesmith5</creator>
+		<owner>sesmith5</owner>
+		<verified>false</verified>
+		<note_list>
+			<note>
+				<note_text>Learn more about Swing to debug GUI.</note_text>
+				<note_author>sesmith5</note_author>
+			</note>
+			<note>
+				<note_text>Adding to sesmith5 backlog.</note_text>
+				<note_author>sesmith5</note_author>
+			</note>
+			<note>
+				<note_text>Found Swing tutorials at	http://docs.oracle.com/javase/tutorial/uiswing/start/.</note_text>
+				<note_author>sesmith5</note_author>
+			</note>
+		</note_list>
+	</tasks>
+	<tasks>
+		<id>4</id>
+		<state>Verifying</state>
+		<title>Calculating Wait Time</title>
+		<type>B</type>
+		<creator>jdyoung2</creator>
+		<owner>sesmith5</owner>
+		<verified>false</verified>
+		<note_list>
+			<note>
+				<note_text>Special carts are failing system tests associated with wait time.</note_text>
+				<note_author>jdyoung2</note_author>
+			</note>
+			<note>
+				<note_text>Adding to sesmith5 backlog.</note_text>
+				<note_author>sesmith5</note_author>
+			</note>
+			<note>
+				<note_text>Replicated failure locally in unit test.</note_text>
+				<note_author>sesmith5</note_author>
+			</note>
+			<note>
+				<note_text>Implementation complete. Requires peer inspection.</note_text>
+				<note_author>sesmith5</note_author>
+			</note>
+		</note_list>
+	</tasks>
+	<tasks>
+		<id>5</id>
+		<state>Done</state>
+		<title>Special Carts</title>
+		<type>F</type>
+		<creator>jep</creator>
+		<owner>sesmith5</owner>
+		<verified>true</verified>
+		<note_list>
+			<note>
+				<note_text>Special carts always choose the shortest special register line. If there are multiple shortest special register lines, a special cart chooses one with the smallest index.</note_text>
+				<note_author>jep</note_author>
+			</note>
+			<note>
+				<note_text>Adding to sesmith5 backlog.</note_text>
+				<note_author>sesmith5</note_author>
+			</note>
+			<note>
+				<note_text>Created hierarchy to prepare for other cart types.</note_text>
+				<note_author>sesmith5</note_author>
+			</note>
+			<note>
+				<note_text>Implementation complete. Requires peer inspection.</note_text>
+				<note_author>sesmith5</note_author>
+			</note>
+			<note>
+				<note_text>No problems found during inspection.</note_text>
+				<note_author>jdyoung2</note_author>
+			</note>
+		</note_list>
+	</tasks>
+	<tasks>
+		<id>6</id>
+		<state>Rejected</state>
+		<title>Flatbed carts</title>
+		<type>F</type>
+		<creator>jep</creator>
+		<verified>false</verified>
+		<note_list>
+			<note>
+				<note_text>Add flatbed carts to simulation.</note_text>
+				<note_author>jep</note_author>
+			</note>
+			<note>
+				<note_text>Rejected. Flatbed carts won't fit through physical register stations.</note_text>
+				<note_author>sesmith5</note_author>
+			</note>
+		</note_list>
+	</tasks>
+</task_list>

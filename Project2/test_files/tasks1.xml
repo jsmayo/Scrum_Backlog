@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<task_list>
+	<tasks>
+		<id>-1</id>
+		<state>Backlog</state>
+		<title>Express Carts</title>
+		<type>F</type>
+		<creator>jep</creator>
+		<verified>false</verified>
+		<note_list>
+			<note>
+				<note_text>Express carts always choose the shortest line. If there
+					are multiple shortest lines, an express cart chooses the one with
+					the smallest index.</note_text>
+				<note_author>jep</note_author>
+			</note>
+		</note_list>
+	</tasks>
+</task_list>
