@@ -82,6 +82,7 @@ public class TaskItem {
 			throw new IllegalArgumentException();
 		this.title = title;
 		this.creator = creator;
+		this.owner = "";
 		this.notes.add(new Note(creator, note));
 		this.state = backlogState;
 		if(type == Type.FEATURE) setType(T_FEATURE);
@@ -106,7 +107,7 @@ public class TaskItem {
 		String typeString = task.getType();
 		String creator = task.getCreator();
 		String state = task.getState();
-		String owner = task.getOwner();
+		String taskOwner = task.getOwner();
 		setCounter(task.getId());
 		taskId = task.getId();
 		List<NoteItem> notelist = task.getNoteList().getNotes();
@@ -123,7 +124,7 @@ public class TaskItem {
 		this.title = title;
 		this.type = type;
 		this.creator = creator;
-		this.owner = owner;
+		this.owner = taskOwner;
 		
 		
 		

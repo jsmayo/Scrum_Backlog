@@ -90,9 +90,14 @@ public class TaskItemList {
 	 * owner name.
 	 */
 	public List<TaskItem> getTaskItemsByOwner(String owner) {
+		List<TaskItem> taskItemList = new ArrayList<TaskItem>();
+		taskItemList = this.getTaskItems();
 		List<TaskItem> byOwner = new ArrayList<TaskItem>();
-		for(int i = 0; i < this.tasks.size(); i++) {
-			if(tasks.get(i).getOwner().equals(owner)) byOwner.add(tasks.get(i));
+		for(int i = 0; i < taskItemList.size(); i++) {
+			if(taskItemList.get(i).getOwner().equals(owner)) { //search for any matching Owners
+				TaskItem task = taskItemList.get(i); //create a new taskitem 
+				byOwner.add(task); //add new taskitem to list
+			}
 		}
 		return byOwner;
 		
@@ -107,7 +112,7 @@ public class TaskItemList {
 	 */
 	public List<TaskItem> getTasksByCreator(String creator) {
 		List<TaskItem> byCreator = this.getTaskItems();
-		for(int i = 0; i <= tasks.size(); i++) {
+		for(int i = 0; i < tasks.size(); i++) {
 			if(tasks.get(i).getCreator().equals(creator)) byCreator.add(tasks.get(i));
 		}
 		return byCreator;

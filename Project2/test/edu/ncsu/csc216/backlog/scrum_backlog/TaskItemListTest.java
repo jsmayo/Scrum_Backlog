@@ -68,7 +68,7 @@ public class TaskItemListTest {
 	 * Tests for getTaskItemsByOwner() of TaskItemList
 	 */
 	@Test
-	public void testGetTasksByCreator() {
+	public void testGetTasksByOwner() {
 		list = new TaskItemList();
 		list.addTaskItem("task1", TaskItem.Type.BUG, "Steven", "All the notes imaginable");
 		list.getTaskItemById(1).update(new Command(CommandValue.CLAIM, "Steven", "note")); //CLAIM TASK
@@ -80,5 +80,9 @@ public class TaskItemListTest {
 		assertTrue(list.getTaskItemById(1).getTitle().equals("task1"));
 		assertTrue(list.getTaskItemById(2).getCreator().equals("Steven"));
 		assertEquals("size should be 2", 2, list.getTaskItemsByOwner("Steven").size());
+	
+		//assertEquals("size should be 3", 3, list.getTasksByCreator("Steven"));
+	
 	}
+	
 }
