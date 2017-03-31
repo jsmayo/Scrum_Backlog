@@ -10,47 +10,16 @@ import edu.ncsu.csc216.backlog.command.Command;
 import edu.ncsu.csc216.backlog.command.Command.CommandValue;
 import edu.ncsu.csc216.backlog.task.TaskItem;
 
+/**
+ * Test class for ScrumBacklogModel
+ * 
+ * @author Steven
+ */
 public class ScrumBacklogModelTest {
 
 	/** Instance for scrumbacklog model */
 	ScrumBacklogModel instance = ScrumBacklogModel.getInstance();
 	
-	
-	
-
-//	/** Contains files that will be created by the tests */
-//	private String actFileNames = "test_files/act_tasks_valid.xml";
-//	/** Contains expected results for the files */
-//	private String expFileNames = "test_files/tasks_valid.xml";
-//	
-//	/**
-//	 * Compares the contents of the two files.  Returns true if the contents 
-//	 * are exactly the same. Returns false if the contents are not
-//	 * the same or if there are any errors while processing.
-//	 * 
-//	 * @param expectedFile the file with expected results
-//	 * @param actualFile the file with actual results
-//	 */
-//	private void compareFiles(String expectedFile, String actualFile) {
-//		try {
-//			Scanner expectedIn = new Scanner(new File (expectedFile));
-//			Scanner actualIn = new Scanner(new File (actualFile));
-//			
-//			while (expectedIn.hasNextLine()) {
-//				assertEquals("Expected File: " + expectedFile, expectedIn.nextLine(), actualIn.nextLine());
-//			}
-//			if (actualIn.hasNextLine()) {
-//				fail("Expected File: " + expectedFile + " Actual File has more lines than expected file.");
-//			}
-//			
-//			expectedIn.close();
-//			actualIn.close();
-//		} catch (FileNotFoundException e) {
-//			fail("Expected File: " + expectedFile + " FileNotFound for expected or actual file.");
-//		} catch (NoSuchElementException e) {
-//			fail("Expected File: " + expectedFile + " One of the files didn't have an expected line.");
-//		}
-//	}
 	
 	
 	/**

@@ -6,7 +6,13 @@ import org.junit.Test;
 
 import edu.ncsu.csc216.backlog.command.Command.CommandValue;
 
+/**
+ * Test Class for the Command class
+ * 
+ * @author Steven
+ */
 public class CommandTest {
+	/**Command object */
 	private Command command;
 
 	@Test

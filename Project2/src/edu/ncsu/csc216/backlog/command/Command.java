@@ -17,6 +17,13 @@ public class Command {
 	/** CommandValue enumerator for the Scrum Backlog FSM. */
 	public static enum CommandValue { BACKLOG, CLAIM, PROCESS, VERIFY, COMPLETE, REJECT }
 	
+	/**
+	 * Constructor for the Command object. 
+	 * @param command A CommandValue enumerator that will be used to update
+	 * the TaskItem's state.
+	 * @param noteAuthor Author of the TaskItem's note
+	 * @param note Text content of the Note
+	 */
 	public Command(CommandValue command, String noteAuthor, String note) {
 		if(command == null || note == null || note.isEmpty() || noteAuthor == null || noteAuthor.isEmpty())
 			throw new IllegalArgumentException();

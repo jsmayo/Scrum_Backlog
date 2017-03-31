@@ -52,6 +52,7 @@ public class TaskItemList {
 	 * @param type Type of the TaskItem.
 	 * @param creator Creator of the TaskItem.
 	 * @param note Note designated for the TaskItem.
+	 * @return The unique ID number of the newly created TaskItem.
 	 */
 	public int addTaskItem(String title, Type type, String creator, String note) {
 		TaskItem taskItem = new TaskItem(title, type, creator, note);
@@ -61,7 +62,7 @@ public class TaskItemList {
 	
 	/**
 	 * Add's a list of Tasks to the current TaskItemList.
-	 * @param List of Task's to add to the TaskItemList.
+	 * @param tasklist List of Task's to add to the TaskItemList.
 	 */
 	public void addXMLTasks(List<Task> tasklist) {
 		//use TaskItem(Task) constructor.
@@ -106,7 +107,7 @@ public class TaskItemList {
 	/**
 	 * Getter method that returns a filtered list of TaskItems. The
 	 * Task creator is used as means for filtering the current TaskItemList.
-	 * @param owner Creator of the TaskItem.
+	 * @param creator Creator of the TaskItem.
 	 * @return List of TaskItem objects that are filtered by the TaskItem
 	 * creator name.
 	 */

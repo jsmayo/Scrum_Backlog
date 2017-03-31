@@ -95,7 +95,7 @@ public class ScrumBacklogModel {
 	 */
 	public Object[][] getTaskItemListAsArray() {
 		Object[][] itemListAsArray = new Object[taskItemList.getTaskItems().size()][3];
-		for(int i = 0; i < itemListAsArray.length; i ++) {
+		for(int i = 0; i < itemListAsArray.length; i++) {
 			itemListAsArray[i][0] = taskItemList.getTaskItems().get(i).getTaskItemId();
 			itemListAsArray[i][1] = taskItemList.getTaskItems().get(i).getStateName();
 			itemListAsArray[i][2] = taskItemList.getTaskItems().get(i).getTitle();
