@@ -29,14 +29,34 @@ public class Command {
 			throw new IllegalArgumentException();
 		this.note = note;
 		this.noteAuthor = noteAuthor;
-		if(command == CommandValue.BACKLOG) this.c = CommandValue.BACKLOG;
-		else if(command == CommandValue.CLAIM) this.c = CommandValue.CLAIM;
-		else if(command == CommandValue.PROCESS) this.c = CommandValue.PROCESS;
-		else if(command == CommandValue.VERIFY) this.c = CommandValue.VERIFY;
-		else if(command == CommandValue.COMPLETE) this.c = CommandValue.COMPLETE;
-		else if(command == CommandValue.REJECT) this.c = CommandValue.REJECT;
-		else throw new IllegalArgumentException();
+		switch (command) {
+		case BACKLOG:
+			this.c = CommandValue.BACKLOG;
+			break;
 
+		case CLAIM:
+			this.c = CommandValue.CLAIM;
+			break;
+
+		case PROCESS: 
+			this.c = CommandValue.PROCESS;
+			break;
+
+		case VERIFY:
+			this.c = CommandValue.VERIFY;
+			break;
+
+		case COMPLETE:
+			this.c = CommandValue.COMPLETE;
+			break;
+
+		case REJECT:
+			this.c = CommandValue.REJECT;
+			break;
+
+		default:
+			throw new IllegalArgumentException();		
+		}
 	}
 	
 	/**

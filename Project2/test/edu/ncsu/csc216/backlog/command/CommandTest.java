@@ -66,6 +66,12 @@ public class CommandTest {
 			assertTrue("Command should not have been overwritten", command.getCommand() == CommandValue.BACKLOG);
 		}
 		
+		assertTrue(CommandValue.BACKLOG != null);
+		assertTrue(CommandValue.CLAIM != null);
+		assertTrue(CommandValue.PROCESS != null);
+		assertTrue(CommandValue.REJECT != null);
+		assertTrue(CommandValue.COMPLETE != null);
+		
 	}
 
 }
