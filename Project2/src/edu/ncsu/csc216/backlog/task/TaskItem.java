@@ -357,7 +357,8 @@ public class TaskItem {
 	 * Returns a 2D string array for Notes associated with the current TaskItem. 
 	 * There is a row for each note entry, as well as, two columns for displaying
 	 * the note author's name and note contents. 
-	 * @return
+	 * @return 2D String array containing the Note author and Note text for
+	 * each note of the current TaskItem.
 	 */
 	public String[][] getNotesArray() {
 		String[][] noteArray = new String[notes.size() + 1 ][2];

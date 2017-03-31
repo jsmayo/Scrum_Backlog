@@ -187,12 +187,12 @@ public class TaskItemTest {
 		assertTrue("should change to veryifing", TaskItem.VERIFYING_NAME == item.getStateName());
 		assertEquals(item.getNotesArray().length, 7); // should have 7 notes by now
 		
-		item.update(doneCommand);//verified to done state
+		item.update(doneCommand); //verified to done state
 		assertEquals("owner", item.getOwner());
 		assertTrue("should change to done", TaskItem.DONE_NAME == item.getStateName());
 		assertEquals(item.getNotesArray().length, 8); // should have 8 notes by now
 		
-		item.update(backlogCommand);//send back to backlog state
+		item.update(backlogCommand); //send back to backlog state
 		assertEquals("owner", item.getOwner());
 		assertTrue("should change to backlog", TaskItem.BACKLOG_NAME == item.getStateName());
 		assertEquals(item.getNotesArray().length, 9);
@@ -203,12 +203,12 @@ public class TaskItemTest {
 		assertTrue("should change to rejected", TaskItem.REJECTED_NAME == item.getStateName());
 		assertEquals(item.getNotesArray().length, 11);
 		
-		item.update(backlogCommand);//owned to backlog
+		item.update(backlogCommand); //owned to backlog
 		assertEquals("owner", item.getOwner());
 		assertTrue("should change to backlog", TaskItem.BACKLOG_NAME == item.getStateName());
 		assertEquals(item.getNotesArray().length, 12);
 		
-		item.update(ownCommand);//owned
+		item.update(ownCommand); //owned
 		try {
 			item.update(doneCommand); //try to send to complete state
 			fail();

@@ -4,10 +4,19 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+/**
+ * Tests for Note class of ScrumBacklog
+ * 
+ * @author Steven Mayo
+ */
 public class NoteTest {
 	
+	/** Note Object to contain author and note content */
 	private Note note;
 
+	/**
+	 * Tests for Note constructor
+	 */
 	@Test
 	public void testNote() {
 		//test invalid Note creation 

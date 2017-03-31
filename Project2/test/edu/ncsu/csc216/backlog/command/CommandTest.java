@@ -9,12 +9,15 @@ import edu.ncsu.csc216.backlog.command.Command.CommandValue;
 /**
  * Test Class for the Command class
  * 
- * @author Steven
+ * @author Steven Mayo
  */
 public class CommandTest {
 	/**Command object */
 	private Command command;
 
+	/**
+	 * Tests for Command Constructor
+	 */
 	@Test
 	public void testCommand() {
 		//test valid construction

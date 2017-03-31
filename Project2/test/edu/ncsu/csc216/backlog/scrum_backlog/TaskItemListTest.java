@@ -14,11 +14,19 @@ import edu.ncsu.csc216.task.xml.NoteItem;
 import edu.ncsu.csc216.task.xml.NoteList;
 import edu.ncsu.csc216.task.xml.Task;
 
+/**
+ * Test class for the TaskItemList class
+ * 
+ * @author Steven Mayo
+ */
 public class TaskItemListTest {
 	
 	/** TaskItemList to hold TaskItem Objects */
 	TaskItemList list; 
 	
+	/**
+	 * Tests for TaskItemList constructor
+	 */
 	@Test
 	public void testTaskItemList() {
 		list = new TaskItemList();
