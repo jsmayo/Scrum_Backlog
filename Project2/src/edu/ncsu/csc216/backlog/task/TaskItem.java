@@ -103,10 +103,10 @@ public class TaskItem {
 	 * @param task Task to make the TaskItem from.
 	 */
 	public TaskItem(Task task) {
-		String title = task.getTitle();
+		String taskTitle = task.getTitle();
 		String typeString = task.getType();
-		String creator = task.getCreator();
-		String state = task.getState();
+		String taskCreator = task.getCreator();
+		String taskState = task.getState();
 		String taskOwner = task.getOwner();
 		setCounter(task.getId());
 		taskId = task.getId();
@@ -115,15 +115,15 @@ public class TaskItem {
 		for(int i = 0; i < notelist.size(); i++) {
 			notes.add(new Note(notelist.get(i).getNoteAuthor(), notelist.get(i).getNoteText()));
 		}
-		Type type = null;
+		Type taskType = null;
 		if(typeString.equals(T_BUG)) type = Type.BUG;
 		if(typeString.equals(T_FEATURE)) type = Type.FEATURE;
 		if(typeString.equals(T_KNOWLEDGE_ACQUISITION)) type = Type.KNOWLEDGE_ACQUISITION;
 		if(typeString.equals(T_TECHNICAL_WORK)) type = Type.TECHNICAL_WORK;
-		setState(state);
-		this.title = title;
-		this.type = type;
-		this.creator = creator;
+		setState(taskState);
+		this.title = taskTitle;
+		this.type = taskType;
+		this.creator = taskCreator;
 		this.owner = taskOwner;
 		
 		
