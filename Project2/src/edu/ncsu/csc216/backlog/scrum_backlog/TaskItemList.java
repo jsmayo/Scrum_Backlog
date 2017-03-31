@@ -154,10 +154,10 @@ public class TaskItemList {
 	 * @param id Unique ID number of the TaskItem to delete.
 	 */
 	public void deleteTaskItemById(int id) {
-		List<TaskItem> byId = getTaskItems();
-		for(int i = 0; i <= tasks.size(); i++) {
-			if(tasks.get(i).getTaskItemId() == id) byId.add(tasks.get(i));
+		List<TaskItem> taskItemList = this.getTaskItems();
+		for(int i = 0; i < taskItemList.size(); i++) {
+			if(taskItemList.get(i).getTaskItemId() == id) this.tasks.remove(taskItemList.get(0));
 		}
-		tasks.remove(byId.get(0)); //should be only one match.
+		//taskItemList.remove(byId.get(0)); //should be only one match.
 	}
 }

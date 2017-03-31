@@ -82,7 +82,19 @@ public class TaskItemListTest {
 		assertEquals("size should be 2", 2, list.getTaskItemsByOwner("Steven").size());
 	
 		assertEquals("size should be 3", 3, list.getTasksByCreator("Jesse").size());
+		
+		//TEST DELETETASKITEMBYID()
+		list.deleteTaskItemById(1);
+		assertTrue("size should have decreased 1", 2 == list.getTasksByCreator("Jesse").size());
+		
+		//TEST EXECUTECOMMAND()
+		assertTrue("owned state", list.getTaskItemById(2).getStateName() == TaskItem.OWNED_NAME);
+		list.executeCommand(2, new Command(CommandValue.PROCESS, "steven", "executed command"));
+		assertTrue("execute command should have changed the state to processing", list.getTaskItemById(2).getStateName() == TaskItem.PROCESSING_NAME);
+		
 	
 	}
+	
+	
 	
 }
