@@ -66,7 +66,7 @@ public class TaskItem {
 	/** Enumerator for the designating the specific Type of the TaskItem Object */
 	public static enum Type { FEATURE, BUG, TECHNICAL_WORK, KNOWLEDGE_ACQUISITION }
 	private Type type;
-	private ArrayList<Note> notes = new ArrayList();
+	private ArrayList<Note> notes = new ArrayList<Note>();
 	
 	
 	

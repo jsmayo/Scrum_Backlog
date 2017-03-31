@@ -66,7 +66,7 @@ public class TaskItemList {
 	public void addXMLTasks(List<Task> tasklist) {
 		//use TaskItem(Task) constructor.
 		int highestId = -1;
-		for(int i = 0; i <= tasklist.size(); i++) {
+		for(int i = 0; i < tasklist.size(); i++) {
 			tasks.add(new TaskItem(tasklist.get(i)));
 			if( tasklist.get(i).getId() > highestId) highestId = tasklist.get(i).getId();
 		}
@@ -105,7 +105,7 @@ public class TaskItemList {
 	 * creator name.
 	 */
 	public List<TaskItem> getTasksByCreator(String creator) {
-		List<TaskItem> byCreator = getTaskItems();
+		List<TaskItem> byCreator = this.getTaskItems();
 		for(int i = 0; i <= tasks.size(); i++) {
 			if(tasks.get(i).getCreator().equals(creator)) byCreator.add(tasks.get(i));
 		}
@@ -120,11 +120,11 @@ public class TaskItemList {
 	 * creator name.
 	 */
 	public TaskItem getTaskItemById(int id) {
-		List<TaskItem> byId = getTaskItems();
-		for(int i = 0; i <= tasks.size(); i++) {
-			if(tasks.get(i).getTaskItemId() == id) byId.add(tasks.get(i));
+		TaskItem byId = null;
+		for(int i = 0; i < tasks.size(); i++) {
+			if(tasks.get(i).getTaskItemId() == id) byId = tasks.get(i);
 		}
-		return byId.get(0); //should be only one match.
+		return byId;
 
 	}
 	

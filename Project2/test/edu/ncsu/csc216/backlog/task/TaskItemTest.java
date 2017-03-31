@@ -2,18 +2,12 @@ package edu.ncsu.csc216.backlog.task;
 
 
 import static org.junit.Assert.*;
-
-import java.util.List;
-
 import org.junit.Test;
-
 import edu.ncsu.csc216.backlog.command.Command;
 import edu.ncsu.csc216.backlog.command.Command.CommandValue;
 import edu.ncsu.csc216.task.xml.NoteItem;
 import edu.ncsu.csc216.task.xml.NoteList;
 import edu.ncsu.csc216.task.xml.Task;
-import edu.ncsu.csc216.task.xml.TaskIOException;
-import edu.ncsu.csc216.task.xml.TaskReader;
 
 public class TaskItemTest {
 	
