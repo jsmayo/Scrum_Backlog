@@ -12,10 +12,10 @@ public class CommandTest {
 	@Test
 	public void testCommand() {
 		//test valid construction
-		command = new Command (CommandValue.BACKLOG, "this is my note", "Steven");
+		command = new Command (CommandValue.BACKLOG, "steven", "this is my note");
 		assertTrue(CommandValue.BACKLOG == command.getCommand());
 		assertTrue("this is my note".equals(command.getNoteText()));
-		assertTrue(command.getNoteAuthor().equals("Steven"));
+		assertTrue(command.getNoteAuthor().equals("steven"));
 		
 		//test null command value
 		try {

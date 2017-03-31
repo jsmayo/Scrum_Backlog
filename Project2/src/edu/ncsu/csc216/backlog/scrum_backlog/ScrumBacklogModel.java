@@ -27,7 +27,7 @@ public class ScrumBacklogModel {
 	 * instance.
 	 */
 	private ScrumBacklogModel() {
-		//singleton = new ScrumBacklogModel();
+		//singleton = new ScrumBacklogModel(); //potentially recursive. should only make what is needed, since getInstance does the rest if null
 		taskItemList = new TaskItemList();
 	}
 	

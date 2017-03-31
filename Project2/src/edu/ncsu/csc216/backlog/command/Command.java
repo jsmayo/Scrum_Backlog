@@ -17,7 +17,7 @@ public class Command {
 	/** CommandValue enumerator for the Scrum Backlog FSM. */
 	public static enum CommandValue { BACKLOG, CLAIM, PROCESS, VERIFY, COMPLETE, REJECT }
 	
-	public Command(CommandValue command, String note, String noteAuthor) {
+	public Command(CommandValue command, String noteAuthor, String note) {
 		if(command == null || note == null || note.isEmpty() || noteAuthor == null || noteAuthor.isEmpty())
 			throw new IllegalArgumentException();
 		this.note = note;
@@ -36,7 +36,7 @@ public class Command {
 			break;
 
 		case VERIFY:
-			this.c = CommandValue.PROCESS;
+			this.c = CommandValue.VERIFY;
 			break;
 
 		case COMPLETE:

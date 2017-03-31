@@ -105,9 +105,13 @@ public class TaskItem {
 		String title = task.getTitle();
 		String typeString = task.getType();
 		String creator = task.getCreator();
+		String state = task.getState();
+		String owner = task.getOwner();
+		setCounter(task.getId());
+		taskId = task.getId();
 		List<NoteItem> notelist = task.getNoteList().getNotes();
 		//take notes from task and place into notes for taskitem
-		for(int i = 0; i <= notelist.size(); i++) {
+		for(int i = 0; i < notelist.size(); i++) {
 			notes.add(new Note(notelist.get(i).getNoteAuthor(), notelist.get(i).getNoteText()));
 		}
 		Type type = null;
@@ -115,9 +119,12 @@ public class TaskItem {
 		if(typeString.equals(T_FEATURE)) type = Type.FEATURE;
 		if(typeString.equals(T_KNOWLEDGE_ACQUISITION)) type = Type.KNOWLEDGE_ACQUISITION;
 		if(typeString.equals(T_TECHNICAL_WORK)) type = Type.TECHNICAL_WORK;
+		setState(state);
 		this.title = title;
 		this.type = type;
 		this.creator = creator;
+		this.owner = owner;
+		
 		
 		
 	}
@@ -184,8 +191,6 @@ public class TaskItem {
 			default:
 				throw new IllegalArgumentException();
 		}
-		
-		
 	
 	}
 	
@@ -214,10 +219,7 @@ public class TaskItem {
 			default:
 				throw new IllegalArgumentException();
 		}
-		
-			
-		
-		
+	
 	}
 	
 	/**
@@ -329,7 +331,7 @@ public class TaskItem {
 		task.setVerified(isVerified);
 		task.setType(getTypeString());
 		NoteList noteList = new NoteList();
-		for(int i = 0; i <= notes.size(); i++) {
+		for(int i = 0; i < notes.size(); i++) {
 			NoteItem noteitem = new NoteItem();
 			noteitem.setNoteAuthor(notes.get(i).getNoteAuthor());
 			noteitem.setNoteText(notes.get(i).getNoteText());
@@ -357,8 +359,8 @@ public class TaskItem {
 	 * @return
 	 */
 	public String[][] getNotesArray() {
-		String[][] noteArray = new String[notes.size() - 1][2];
-		for(int i = 0; i <= notes.size(); i++) {
+		String[][] noteArray = new String[notes.size() + 1 ][2];
+		for(int i = 0; i < notes.size(); i++) {
 			noteArray[i][0] = notes.get(i).getNoteAuthor();
 			noteArray[i][1] = notes.get(i).getNoteText();
 		}
@@ -454,7 +456,7 @@ public class TaskItem {
 		public void updateState(Command command) {
 			if(CommandValue.PROCESS == command.getCommand()) {
 				notes.add(new Note(command.getNoteAuthor(), command.getNoteText()));
-				setState(TaskItem.OWNED_NAME); 
+				setState(TaskItem.PROCESSING_NAME); 
 			}
 			else if(CommandValue.BACKLOG == command.getCommand()) {
 				notes.add(new Note(command.getNoteAuthor(), command.getNoteText()));
@@ -495,7 +497,7 @@ public class TaskItem {
 		 * 
 		 */
 		public void updateState(Command command) {
-			if(CommandValue.VERIFY == command.getCommand() && Type.KNOWLEDGE_ACQUISITION != getType()) {
+			if(CommandValue.VERIFY == command.getCommand() && !(getType() == Type.KNOWLEDGE_ACQUISITION)) {
 				notes.add(new Note(command.getNoteAuthor(), command.getNoteText()));
 				setState(TaskItem.VERIFYING_NAME); 
 			}
@@ -511,7 +513,7 @@ public class TaskItem {
 		 * @return the name of the current state as a String.
 		 */
 		public String getStateName() {
-			return TaskItem.VERIFYING_NAME;
+			return TaskItem.PROCESSING_NAME;
 		}
 	}
 	
