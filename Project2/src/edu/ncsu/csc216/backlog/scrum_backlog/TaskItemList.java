@@ -25,8 +25,8 @@ public class TaskItemList {
 	 * Constructor for the TaskItemList object.
 	 */
 	public TaskItemList() {
-		emptyList();
 		tasks = new ArrayList<TaskItem>();
+		emptyList();
 		
 	}
 	
@@ -41,6 +41,7 @@ public class TaskItemList {
 		 *  is the only other state (besides the singleton instance), using that method resets the Singleton 
 		 *  to an empty TaskItemList.
 		 */
+		if(tasks == null) new TaskItemList();
 		tasks = new ArrayList<TaskItem>();
 		TaskItem.setCounter(1);
 	}
@@ -114,9 +115,11 @@ public class TaskItemList {
 	 */
 	public List<TaskItem> getTasksByCreator(String creator) {
 		if(creator == null || creator.isEmpty()) throw new IllegalArgumentException();
-		List<TaskItem> taskItemList = this.getTaskItems();
+		List<TaskItem> taskItemList = new ArrayList<TaskItem>();
+		taskItemList = this.getTaskItems();
 		List<TaskItem> byCreator = new ArrayList<TaskItem>();
 		for(int i = 0; i < taskItemList.size(); i++) {
+			if(taskItemList.get(i).getCreator() == null) continue;
 			if(taskItemList.get(i).getCreator().equals(creator)) {
 				TaskItem task = taskItemList.get(i);
 				byCreator.add(task);
