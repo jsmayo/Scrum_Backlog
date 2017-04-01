@@ -165,54 +165,54 @@ public class TaskItemTest {
 		item.update(command);
 		assertEquals("jsm", item.getOwner());
 		assertTrue(TaskItem.OWNED_NAME == item.getStateName());
-		assertEquals(item.getNotesArray().length, 3); //not sure about the 3
+		assertEquals(item.getNotesArray().length, 2); //not sure about the 3
 		
 		//transition to backlog test
 		command = new Command(CommandValue.BACKLOG, "steven", "note 2");
 		item.update(command);
 		assertEquals(null, item.getOwner());
 		assertTrue(TaskItem.BACKLOG_NAME == item.getStateName());
-		assertEquals(item.getNotesArray().length, 4); 
+		assertEquals(item.getNotesArray().length, 3); 
 		try {
 			item.update(command);
 			fail();
 		} catch (UnsupportedOperationException e){
 			assertEquals(null, item.getOwner());
 			assertTrue(TaskItem.BACKLOG_NAME == item.getStateName());
-			assertEquals(item.getNotesArray().length, 4); 
+			assertEquals(item.getNotesArray().length, 3); 
 		}
 		
 		item.update(ownCommand); //owned state
 		item.update(processCommand); //owned to process
 		assertEquals("owner", item.getOwner());
 		assertTrue("should change to processing", TaskItem.PROCESSING_NAME == item.getStateName());
-		assertEquals(item.getNotesArray().length, 6); // should have 5 notes by now
+		assertEquals(item.getNotesArray().length, 5); // should have 5 notes by now
 		
 		item.update(verifyCommand); //process to verified state
 		assertEquals("owner", item.getOwner());
 		assertTrue("should change to veryifing", TaskItem.VERIFYING_NAME == item.getStateName());
-		assertEquals(item.getNotesArray().length, 7); // should have 7 notes by now
+		assertEquals(item.getNotesArray().length, 6); // should have 7 notes by now
 		
 		item.update(doneCommand); //verified to done state
 		assertEquals("owner", item.getOwner());
 		assertTrue("should change to done", TaskItem.DONE_NAME == item.getStateName());
-		assertEquals(item.getNotesArray().length, 8); // should have 8 notes by now
+		assertEquals(item.getNotesArray().length, 7); // should have 8 notes by now
 		
 		item.update(backlogCommand); //send back to backlog state
 		assertEquals(null, item.getOwner());
 		assertTrue("should change to backlog", TaskItem.BACKLOG_NAME == item.getStateName());
-		assertEquals(item.getNotesArray().length, 9);
+		assertEquals(item.getNotesArray().length, 8);
 		
 		item.update(ownCommand); //owned state
 		item.update(rejectCommand); //reject
 		assertEquals(null, item.getOwner());
 		assertTrue("should change to rejected", TaskItem.REJECTED_NAME == item.getStateName());
-		assertEquals(item.getNotesArray().length, 11);
+		assertEquals(item.getNotesArray().length, 10);
 		
 		item.update(backlogCommand); //owned to backlog
 		assertEquals(null, item.getOwner());
 		assertTrue("should change to backlog", TaskItem.BACKLOG_NAME == item.getStateName());
-		assertEquals(item.getNotesArray().length, 12);
+		assertEquals(item.getNotesArray().length, 11);
 		
 		item.update(ownCommand); //owned
 		try {
@@ -221,13 +221,13 @@ public class TaskItemTest {
 		} catch (UnsupportedOperationException e){
 			assertEquals("owner", item.getOwner());
 			assertTrue(TaskItem.OWNED_NAME == item.getStateName());
-			assertEquals(item.getNotesArray().length, 13); 
+			assertEquals(item.getNotesArray().length, 12); 
 		}
 		
 		item.update(rejectCommand); //own to reject state
 		assertEquals(null, item.getOwner());
 		assertTrue("should change to rejected", TaskItem.REJECTED_NAME == item.getStateName());
-		assertEquals(item.getNotesArray().length, 14);
+		assertEquals(item.getNotesArray().length, 13);
 		
 		item.update(backlogCommand);
 		item.update(ownCommand);
@@ -244,7 +244,7 @@ public class TaskItemTest {
 		} catch (UnsupportedOperationException e){
 			assertEquals("owner", item.getOwner());
 			assertTrue(TaskItem.VERIFYING_NAME == item.getStateName());
-			assertEquals(item.getNotesArray().length, 23); //NOTE LENGTH = CORRECT TRANSITION INDICATION!!! :)
+			assertEquals(item.getNotesArray().length, 22); //NOTE LENGTH = CORRECT TRANSITION INDICATION!!! :)
 		}
 		
 		//test KA type transition

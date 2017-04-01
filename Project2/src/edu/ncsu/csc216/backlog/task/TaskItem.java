@@ -362,7 +362,7 @@ public class TaskItem {
 	 * each note of the current TaskItem.
 	 */
 	public String[][] getNotesArray() {
-		String[][] noteArray = new String[notes.size() + 1 ][2];
+		String[][] noteArray = new String[notes.size() ][2];
 		for(int i = 0; i < notes.size(); i++) {
 			noteArray[i][0] = notes.get(i).getNoteAuthor();
 			noteArray[i][1] = notes.get(i).getNoteText();
