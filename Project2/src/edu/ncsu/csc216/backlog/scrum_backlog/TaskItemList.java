@@ -160,7 +160,7 @@ public class TaskItemList {
 		List<TaskItem> taskItemList = this.getTaskItems();
 		for(int i = 0; i < taskItemList.size(); i++) {
 			if(taskItemList.get(i).getTaskItemId() == id) {
-				taskItemList.remove(taskItemList.get(0));
+				taskItemList.remove(taskItemList.get(i));
 				this.tasks = taskItemList;
 			}
 		}
