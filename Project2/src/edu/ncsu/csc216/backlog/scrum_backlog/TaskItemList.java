@@ -100,10 +100,10 @@ public class TaskItemList {
 	public List<TaskItem> getTaskItemsByOwner(String owner) {
 		if(owner == null || owner.isEmpty()) throw new IllegalArgumentException();
 		List<TaskItem> taskItemList = new ArrayList<TaskItem>();
-		taskItemList = this.getTaskItems();
+		taskItemList = getTaskItems();
 		List<TaskItem> byOwner = new ArrayList<TaskItem>();
 		for(int i = 0; i < taskItemList.size(); i++) {
-			if(taskItemList.get(i).getOwner().equals(owner)) { //search for any matching Owners
+			if(taskItemList.get(i).getOwner() != null && taskItemList.get(i).getOwner().equals(owner)) { //search for any matching Owners
 				TaskItem task = taskItemList.get(i); //create a new taskitem 
 				byOwner.add(task); //add new taskitem to list
 			}
