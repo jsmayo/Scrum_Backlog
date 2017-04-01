@@ -159,7 +159,10 @@ public class TaskItemList {
 	public void deleteTaskItemById(int id) {
 		List<TaskItem> taskItemList = this.getTaskItems();
 		for(int i = 0; i < taskItemList.size(); i++) {
-			if(taskItemList.get(i).getTaskItemId() == id) this.tasks.remove(taskItemList.get(0));
+			if(taskItemList.get(i).getTaskItemId() == id) {
+				taskItemList.remove(taskItemList.get(0));
+				this.tasks = taskItemList;
+			}
 		}
 		//taskItemList.remove(byId.get(0)); //should be only one match.
 	}
