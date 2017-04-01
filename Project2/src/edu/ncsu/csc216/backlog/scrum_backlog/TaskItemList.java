@@ -31,18 +31,19 @@ public class TaskItemList {
 		//emptyList();
 		TaskItem.setCounter(TaskItemList.INITIAL_COUNTER_VALUE);
 		//TaskItem task = new TaskItem();
-		emptyList();
+		this.tasks= emptyList();
 		
 	}
 	
 	/**
 	 * Removes the contents of the current TaskItemList.
 	 */
-	private void emptyList() {
+	private ArrayList<TaskItem> emptyList() {
 		//ScrumBacklogModel.getInstance().createNewTaskItemList();
-		List<TaskItem> emptyList = new ArrayList<TaskItem>();
-		this.tasks = emptyList;
+		//List<TaskItem> emptyList = new ArrayList<TaskItem>();
+		//this.tasks = emptyList;
 		TaskItem.setCounter(TaskItemList.INITIAL_COUNTER_VALUE);
+		return new ArrayList<TaskItem>();
 		
 		
 	}
