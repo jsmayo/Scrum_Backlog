@@ -44,7 +44,9 @@ public class TaskItemList {
 		//ScrumBacklogModel.getInstance().createNewTaskItemList();
 		//if(tasks == null) new TaskItemList();
 		//tasks = new ArrayList<TaskItem>();
-		TaskItem.setCounter(1);
+		TaskItem.setCounter(INITIAL_COUNTER_VALUE);
+		this.tasks = new ArrayList<TaskItem>();
+		
 	}
 	
 	/**
