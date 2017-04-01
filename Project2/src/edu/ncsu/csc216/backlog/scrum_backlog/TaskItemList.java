@@ -45,7 +45,7 @@ public class TaskItemList {
 		//if(tasks == null) new TaskItemList();
 		//tasks = new ArrayList<TaskItem>();
 		TaskItem.setCounter(INITIAL_COUNTER_VALUE);
-		this.tasks = new ArrayList<TaskItem>();
+		
 		
 	}
 	
