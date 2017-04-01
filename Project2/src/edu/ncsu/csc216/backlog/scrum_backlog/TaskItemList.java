@@ -91,6 +91,7 @@ public class TaskItemList {
 	 * owner name.
 	 */
 	public List<TaskItem> getTaskItemsByOwner(String owner) {
+		if(owner == null || owner.isEmpty()) throw new IllegalArgumentException();
 		List<TaskItem> taskItemList = new ArrayList<TaskItem>();
 		taskItemList = this.getTaskItems();
 		List<TaskItem> byOwner = new ArrayList<TaskItem>();
@@ -112,6 +113,7 @@ public class TaskItemList {
 	 * creator name.
 	 */
 	public List<TaskItem> getTasksByCreator(String creator) {
+		if(creator == null || creator.isEmpty()) throw new IllegalArgumentException();
 		List<TaskItem> taskItemList = this.getTaskItems();
 		List<TaskItem> byCreator = new ArrayList<TaskItem>();
 		for(int i = 0; i < taskItemList.size(); i++) {
