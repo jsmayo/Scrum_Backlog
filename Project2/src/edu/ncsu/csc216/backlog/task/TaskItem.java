@@ -82,7 +82,7 @@ public class TaskItem {
 			throw new IllegalArgumentException();
 		this.title = title;
 		this.creator = creator;
-		this.owner = "";
+		//this.owner = "";
 		this.notes.add(new Note(creator, note));
 		this.state = backlogState;
 		if(type == Type.FEATURE) setType(T_FEATURE);
@@ -326,6 +326,7 @@ public class TaskItem {
 	public Task getXMLTask() {
 		Task task = new Task();
 		task.setTitle(getTitle());
+		task.setOwner(getOwner());
 		task.setId(this.getTaskItemId());
 		task.setCreator(getCreator());
 		task.setState(state.getStateName());
@@ -408,7 +409,7 @@ public class TaskItem {
 		 * Constructor for the BacklogState transition.
 		 */
 		private BacklogState() {
-			owner = ""; 
+			owner = null; 
 			isVerified = false;
 		}
 		
@@ -503,6 +504,9 @@ public class TaskItem {
 			if(CommandValue.VERIFY == command.getCommand() && !(getType() == Type.KNOWLEDGE_ACQUISITION)) {
 				notes.add(new Note(command.getNoteAuthor(), command.getNoteText()));
 				setState(TaskItem.VERIFYING_NAME); 
+			}
+			else if(CommandValue.PROCESS == command.getCommand()){
+				notes.add(new Note(command.getNoteAuthor(), command.getNoteText()));
 			}
 			else if(CommandValue.BACKLOG == command.getCommand()) {
 				notes.add(new Note(command.getNoteAuthor(), command.getNoteText()));
@@ -613,6 +617,7 @@ public class TaskItem {
 		 */
 		private RejectedState() {
 			isVerified = false;
+			owner = null;
 		}
 		
 		/**
