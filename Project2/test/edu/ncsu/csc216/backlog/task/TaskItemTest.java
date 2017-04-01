@@ -251,6 +251,9 @@ public class TaskItemTest {
 		} catch (UnsupportedOperationException e) {
 			assertTrue(TaskItem.PROCESSING_NAME == item.getStateName());
 		}
+		//item.update(verifyCommand);
+		item.update(doneCommand);
+		item.update(processCommand);
 		
 		
 		

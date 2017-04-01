@@ -508,6 +508,10 @@ public class TaskItem {
 				notes.add(new Note(command.getNoteAuthor(), command.getNoteText()));
 				setState(TaskItem.BACKLOG_NAME);
 			}
+			else if(CommandValue.COMPLETE == command.getCommand() && (getType() == Type.KNOWLEDGE_ACQUISITION)) {
+				notes.add(new Note(command.getNoteAuthor(), command.getNoteText()));
+				setState(TaskItem.DONE_NAME);
+			}
 			else throw new UnsupportedOperationException();
 		}
 
@@ -581,9 +585,9 @@ public class TaskItem {
 				notes.add(new Note(command.getNoteAuthor(), command.getNoteText()));
 				setState(TaskItem.BACKLOG_NAME); 
 			}
-			else if(CommandValue.COMPLETE == command.getCommand()) {
+			else if(CommandValue.PROCESS == command.getCommand()) {
 				notes.add(new Note(command.getNoteAuthor(), command.getNoteText()));
-				setState(TaskItem.DONE_NAME);
+				setState(TaskItem.PROCESSING_NAME);
 			}
 			else throw new UnsupportedOperationException();
 		}
