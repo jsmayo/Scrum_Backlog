@@ -423,6 +423,11 @@ public class TaskItem {
 				setState(TaskItem.OWNED_NAME); 
 				notes.add(new Note(command.getNoteAuthor(), command.getNoteText()));
 			}
+			
+			else if(CommandValue.REJECT == command.getCommand()) {
+				owner = null;
+				setState(TaskItem.REJECTED_NAME);
+			}
 			else throw new UnsupportedOperationException();
 			
 		}
@@ -465,10 +470,12 @@ public class TaskItem {
 			}
 			else if(CommandValue.BACKLOG == command.getCommand()) {
 				notes.add(new Note(command.getNoteAuthor(), command.getNoteText()));
+				owner = null;
 				setState(TaskItem.BACKLOG_NAME);
 			}
 			else if(CommandValue.REJECT == command.getCommand()) {
 				notes.add(new Note(command.getNoteAuthor(), command.getNoteText()));
+				owner = null;
 				setState(TaskItem.REJECTED_NAME);
 			}
 			else throw new UnsupportedOperationException();
@@ -512,10 +519,12 @@ public class TaskItem {
 			}
 			else if(CommandValue.BACKLOG == command.getCommand()) {
 				notes.add(new Note(command.getNoteAuthor(), command.getNoteText()));
+				owner = null;
 				setState(TaskItem.BACKLOG_NAME);
 			}
 			else if(CommandValue.COMPLETE == command.getCommand() && (getType() == Type.KNOWLEDGE_ACQUISITION)) {
 				notes.add(new Note(command.getNoteAuthor(), command.getNoteText()));
+				owner = null;
 				setState(TaskItem.DONE_NAME);
 			}
 			else throw new UnsupportedOperationException();

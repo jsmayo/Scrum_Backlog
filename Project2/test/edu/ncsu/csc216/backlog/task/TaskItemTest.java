@@ -170,14 +170,14 @@ public class TaskItemTest {
 		//transition to backlog test
 		command = new Command(CommandValue.BACKLOG, "steven", "note 2");
 		item.update(command);
-		assertEquals("jsm", item.getOwner());
+		assertEquals(null, item.getOwner());
 		assertTrue(TaskItem.BACKLOG_NAME == item.getStateName());
 		assertEquals(item.getNotesArray().length, 4); 
 		try {
 			item.update(command);
 			fail();
 		} catch (UnsupportedOperationException e){
-			assertEquals("jsm", item.getOwner());
+			assertEquals(null, item.getOwner());
 			assertTrue(TaskItem.BACKLOG_NAME == item.getStateName());
 			assertEquals(item.getNotesArray().length, 4); 
 		}
@@ -205,12 +205,12 @@ public class TaskItemTest {
 		
 		item.update(ownCommand); //owned state
 		item.update(rejectCommand); //reject
-		assertEquals("owner", item.getOwner());
+		assertEquals(null, item.getOwner());
 		assertTrue("should change to rejected", TaskItem.REJECTED_NAME == item.getStateName());
 		assertEquals(item.getNotesArray().length, 11);
 		
 		item.update(backlogCommand); //owned to backlog
-		assertEquals("owner", item.getOwner());
+		assertEquals(null, item.getOwner());
 		assertTrue("should change to backlog", TaskItem.BACKLOG_NAME == item.getStateName());
 		assertEquals(item.getNotesArray().length, 12);
 		
@@ -225,7 +225,7 @@ public class TaskItemTest {
 		}
 		
 		item.update(rejectCommand); //own to reject state
-		assertEquals("owner", item.getOwner());
+		assertEquals(null, item.getOwner());
 		assertTrue("should change to rejected", TaskItem.REJECTED_NAME == item.getStateName());
 		assertEquals(item.getNotesArray().length, 14);
 		
