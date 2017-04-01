@@ -18,7 +18,7 @@ import edu.ncsu.csc216.backlog.task.TaskItem.Type;
  */
 public class TaskItemList {
 
-	List<TaskItem> tasks;
+	List<TaskItem> tasks = new ArrayList<TaskItem>();
 	static final int INITIAL_COUNTER_VALUE = 1;
 	
 	/**
