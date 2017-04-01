@@ -117,14 +117,15 @@ public class TaskItemList {
 	public List<TaskItem> getTasksByCreator(String creator) {
 		if(creator == null || creator.isEmpty()) throw new IllegalArgumentException();
 		List<TaskItem> taskItemList = new ArrayList<TaskItem>();
-		taskItemList = this.getTaskItems();
 		List<TaskItem> byCreator = new ArrayList<TaskItem>();
+		taskItemList = getTaskItems();
 		for(int i = 0; i < taskItemList.size(); i++) {
-			if(taskItemList.get(i).getCreator() == null) continue;
+			//if(taskItemList.get(i).getCreator() == null) continue;
 			if(taskItemList.get(i).getCreator().equals(creator)) {
 				TaskItem task = taskItemList.get(i);
 				byCreator.add(task);
 			}
+			else continue;
 		}
 		return byCreator;
 	}
