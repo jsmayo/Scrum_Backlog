@@ -31,7 +31,7 @@ public class TaskItemList {
 		//emptyList();
 		TaskItem.setCounter(TaskItemList.INITIAL_COUNTER_VALUE);
 		//TaskItem task = new TaskItem();
-		//emptyList();
+		emptyList();
 		
 	}
 	
@@ -39,17 +39,10 @@ public class TaskItemList {
 	 * Removes the contents of the current TaskItemList.
 	 */
 	private void emptyList() {
-		/*if one test adds TaskItems to a list, that those TaskItems will 
-		 * be there for the next test. To make each test atomic so that it
-		 *  can run in isolation, you can use the ScrumBacklogModel.createNewTaskItemList() 
-		 *  method to remove any tasks that exist in the ScrumBacklogModel. Since the taskItemList 
-		 *  is the only other state (besides the singleton instance), using that method resets the Singleton 
-		 *  to an empty TaskItemList.
-		 */
-		ScrumBacklogModel.getInstance().createNewTaskItemList();
-		//List<TaskItem> emptyList = new ArrayList<TaskItem>();
-		//this.tasks = emptyList;
-		
+		//ScrumBacklogModel.getInstance().createNewTaskItemList();
+		List<TaskItem> emptyList = new ArrayList<TaskItem>();
+		this.tasks = emptyList;
+		TaskItem.setCounter(TaskItemList.INITIAL_COUNTER_VALUE);
 		
 		
 	}

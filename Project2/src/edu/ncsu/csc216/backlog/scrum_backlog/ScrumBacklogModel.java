@@ -82,7 +82,6 @@ public class ScrumBacklogModel {
 	 */
 	public void createNewTaskItemList() {
 		taskItemList = new TaskItemList(); //will call constructor, which calls emptyList().
-		
 	}
 	
 	
