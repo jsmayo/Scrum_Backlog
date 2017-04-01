@@ -31,7 +31,7 @@ public class TaskItemList {
 		//emptyList();
 		TaskItem.setCounter(TaskItemList.INITIAL_COUNTER_VALUE);
 		//TaskItem task = new TaskItem();
-		this.tasks= emptyList();
+		this.tasks = emptyList();
 		
 	}
 	
