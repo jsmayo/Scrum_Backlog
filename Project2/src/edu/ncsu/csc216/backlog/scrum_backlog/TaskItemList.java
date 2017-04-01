@@ -21,12 +21,14 @@ public class TaskItemList {
 	List<TaskItem> tasks = new ArrayList<TaskItem>();
 	static final int INITIAL_COUNTER_VALUE = 1;
 	
+	
 	/**
 	 * Constructor for the TaskItemList object.
 	 */
 	public TaskItemList() {
 		this.tasks = new ArrayList<TaskItem>();
-		emptyList();
+		
+		//emptyList();
 		TaskItem.setCounter(TaskItemList.INITIAL_COUNTER_VALUE);
 		//TaskItem task = new TaskItem();
 		//emptyList();
@@ -44,9 +46,9 @@ public class TaskItemList {
 		 *  is the only other state (besides the singleton instance), using that method resets the Singleton 
 		 *  to an empty TaskItemList.
 		 */
-		//ScrumBacklogModel.getInstance().createNewTaskItemList();
-		List<TaskItem> emptyList = new ArrayList<TaskItem>();
-		this.tasks = emptyList;
+		ScrumBacklogModel.getInstance().createNewTaskItemList();
+		//List<TaskItem> emptyList = new ArrayList<TaskItem>();
+		//this.tasks = emptyList;
 		
 		
 		
