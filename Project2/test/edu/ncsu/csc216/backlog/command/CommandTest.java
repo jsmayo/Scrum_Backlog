@@ -71,7 +71,11 @@ public class CommandTest {
 		assertTrue(CommandValue.PROCESS != null);
 		assertTrue(CommandValue.REJECT != null);
 		assertTrue(CommandValue.COMPLETE != null);
-		
+		assertEquals("BACKLOG", CommandValue.BACKLOG.name());
+		assertEquals("CLAIM", CommandValue.CLAIM.name());
+		assertEquals("PROCESS", CommandValue.PROCESS.name());
+		assertEquals("REJECT", CommandValue.REJECT.name());
+		assertEquals("COMPLETE", CommandValue.COMPLETE.name());
 	}
 
 }

@@ -113,6 +113,12 @@ public class TaskItemTest {
 		assertEquals(1, item.getNotes().size());
 		task.setState(TaskItem.OWNED_NAME);
 		assertEquals("steven", item.getOwner());
+	
+		//Test enumerators for Jenkins
+		assertEquals("BUG", TaskItem.Type.BUG.name());
+		assertEquals("FEATURE", TaskItem.Type.FEATURE.name());
+		assertEquals("KNOWLEDGE_ACQUISITION", TaskItem.Type.KNOWLEDGE_ACQUISITION.name());
+		assertEquals("TECHNICAL_WORK", TaskItem.Type.TECHNICAL_WORK.name());
 	}
 	
 	/**
