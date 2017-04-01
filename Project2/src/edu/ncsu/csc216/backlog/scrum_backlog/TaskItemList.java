@@ -27,6 +27,9 @@ public class TaskItemList {
 	public TaskItemList() {
 		this.tasks = new ArrayList<TaskItem>();
 		emptyList();
+		TaskItem.setCounter(TaskItemList.INITIAL_COUNTER_VALUE);
+		//TaskItem task = new TaskItem();
+		//emptyList();
 		
 	}
 	
@@ -42,9 +45,9 @@ public class TaskItemList {
 		 *  to an empty TaskItemList.
 		 */
 		//ScrumBacklogModel.getInstance().createNewTaskItemList();
-		//if(tasks == null) new TaskItemList();
-		//tasks = new ArrayList<TaskItem>();
-		TaskItem.setCounter(INITIAL_COUNTER_VALUE);
+		List<TaskItem> emptyList = new ArrayList<TaskItem>();
+		this.tasks = emptyList;
+		
 		
 		
 	}
