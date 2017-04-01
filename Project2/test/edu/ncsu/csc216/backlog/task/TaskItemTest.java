@@ -199,7 +199,7 @@ public class TaskItemTest {
 		assertEquals(item.getNotesArray().length, 8); // should have 8 notes by now
 		
 		item.update(backlogCommand); //send back to backlog state
-		assertEquals("owner", item.getOwner());
+		assertEquals(null, item.getOwner());
 		assertTrue("should change to backlog", TaskItem.BACKLOG_NAME == item.getStateName());
 		assertEquals(item.getNotesArray().length, 9);
 		
