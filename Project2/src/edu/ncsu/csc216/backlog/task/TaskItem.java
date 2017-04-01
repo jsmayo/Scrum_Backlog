@@ -434,6 +434,7 @@ public class TaskItem {
 		public String getStateName() {
 			return BACKLOG_NAME;
 			
+			
 		}
 	}
 	
@@ -493,6 +494,7 @@ public class TaskItem {
 		 */
 		private ProcessingState() {
 			state = processingState;
+			isVerified = false;
 		}
 
 		/**
@@ -578,6 +580,7 @@ public class TaskItem {
 		 */
 		private DoneState() {
 			state = doneState;
+			owner = null;
 		}
 		
 		/**
